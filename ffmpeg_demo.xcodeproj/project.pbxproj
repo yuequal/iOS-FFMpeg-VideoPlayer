@@ -20,6 +20,7 @@
 		C08EE7E52145164C00B79D34 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C08EE7E42145164C00B79D34 /* video.mp4 */; };
 		C08EE81021455E6800B79D34 /* AVDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C08EE80E21455E6800B79D34 /* AVDecode.cpp */; };
 		C0B7702D21588080006F9688 /* AVDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B7702C21588080006F9688 /* AVDispatchQueue.m */; };
+		C0B7703021589956006F9688 /* AVMessageBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0B7702F21589956006F9688 /* AVMessageBuffer.cpp */; };
 		C0F22AC12142689C006AF382 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F22AC02142689C006AF382 /* AppDelegate.m */; };
 		C0F22AC42142689C006AF382 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0F22AC32142689C006AF382 /* ViewController.mm */; };
 		C0F22AC72142689C006AF382 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F22AC52142689C006AF382 /* Main.storyboard */; };
@@ -97,6 +98,8 @@
 		C08EE80F21455E6800B79D34 /* AVDecode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVDecode.hpp; sourceTree = "<group>"; };
 		C0B7702B21588080006F9688 /* AVDispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVDispatchQueue.h; sourceTree = "<group>"; };
 		C0B7702C21588080006F9688 /* AVDispatchQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVDispatchQueue.m; sourceTree = "<group>"; };
+		C0B7702E21589956006F9688 /* AVMessageBuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AVMessageBuffer.hpp; sourceTree = "<group>"; };
+		C0B7702F21589956006F9688 /* AVMessageBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AVMessageBuffer.cpp; sourceTree = "<group>"; };
 		C0F22ABC2142689C006AF382 /* ffmpeg_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ffmpeg_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F22ABF2142689C006AF382 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F22AC02142689C006AF382 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -348,7 +351,7 @@
 				C08A9C1B2150E58700003ED8 /* Resource */,
 				C0F22B1421426AA9006AF382 /* FFmpeg-iOS */,
 				C08A9C1C2150E59B00003ED8 /* Controller */,
-				C0F22B9921426E00006AF382 /* iOS-AVVideoPlayer */,
+				C0F22B9921426E00006AF382 /* AVVideoPlayer */,
 				C0F22ABF2142689C006AF382 /* AppDelegate.h */,
 				C0F22AC02142689C006AF382 /* AppDelegate.m */,
 				C0F22AC22142689C006AF382 /* ViewController.h */,
@@ -599,9 +602,11 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
-		C0F22B9921426E00006AF382 /* iOS-AVVideoPlayer */ = {
+		C0F22B9921426E00006AF382 /* AVVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				C0B7702F21589956006F9688 /* AVMessageBuffer.cpp */,
+				C0B7702E21589956006F9688 /* AVMessageBuffer.hpp */,
 				C0F22B9A2142817C006AF382 /* AVDemux.cpp */,
 				C0F22B9B2142817C006AF382 /* AVDemux.hpp */,
 				C08EE80F21455E6800B79D34 /* AVDecode.hpp */,
@@ -621,7 +626,7 @@
 				C04F3B4421539CBD008A6025 /* AVAudioThread.cpp */,
 				C04F3B4521539CBD008A6025 /* AVAudioThread.hpp */,
 			);
-			path = "iOS-AVVideoPlayer";
+			path = AVVideoPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -766,6 +771,7 @@
 				C0F22B9C2142817C006AF382 /* AVDemux.cpp in Sources */,
 				C08A9C2421510A4E00003ED8 /* AVPlayerProtocol.cpp in Sources */,
 				C04F3B4021529243008A6025 /* AVDecodeThread.cpp in Sources */,
+				C0B7703021589956006F9688 /* AVMessageBuffer.cpp in Sources */,
 				C08A9C2721510C2900003ED8 /* AVVideoPlayer.cpp in Sources */,
 				C08A9C2A215142EB00003ED8 /* AVModeFrame.cpp in Sources */,
 				C00E52E12147B09800398898 /* AVDemuxThread.cpp in Sources */,
