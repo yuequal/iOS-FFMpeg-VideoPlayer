@@ -351,7 +351,7 @@
 				C08A9C1B2150E58700003ED8 /* Resource */,
 				C0F22B1421426AA9006AF382 /* FFmpeg-iOS */,
 				C08A9C1C2150E59B00003ED8 /* Controller */,
-				C0F22B9921426E00006AF382 /* iOS-AVVideoPlayer */,
+				C0F22B9921426E00006AF382 /* AVVideoPlayer */,
 				C0F22ABF2142689C006AF382 /* AppDelegate.h */,
 				C0F22AC02142689C006AF382 /* AppDelegate.m */,
 				C0F22AC22142689C006AF382 /* ViewController.h */,
@@ -602,7 +602,7 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
-		C0F22B9921426E00006AF382 /* iOS-AVVideoPlayer */ = {
+		C0F22B9921426E00006AF382 /* AVVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
 				C0B7702F21589956006F9688 /* AVMessageBuffer.cpp */,
@@ -626,7 +626,7 @@
 				C04F3B4421539CBD008A6025 /* AVAudioThread.cpp */,
 				C04F3B4521539CBD008A6025 /* AVAudioThread.hpp */,
 			);
-			path = "iOS-AVVideoPlayer";
+			path = AVVideoPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
