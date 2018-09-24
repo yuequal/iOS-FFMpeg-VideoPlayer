@@ -18,6 +18,7 @@ extern "C"{
 #include <libavformat/avformat.h>
 }
 #include "AVDecode.hpp"
+#include "AVPacketQueue.hpp"
 namespace AVVideoPlayer {
     
     typedef std::shared_ptr<AVDecode> AVDecodePtr;
@@ -47,6 +48,7 @@ namespace AVVideoPlayer {
         std::thread m_decodeThread;
         std::shared_ptr<AVDecode> m_decode;
         std::condition_variable m_decodeThreadCond;
+        AVPacketQueue<AVPacket> m_packetQueue;
     };
 }
 
