@@ -10,11 +10,11 @@
 
 namespace AVVideoPlayer {
     
-    AVVideoThread::AVVideoThread(AVCodecParameters *params, AVVideoCall *call, const AVDecodePtr& ptr, const int& maxSize) :
+    AVVideoThread::AVVideoThread(AVCodecParameters *params, AVVideoPLay *call, const AVDecodePtr& ptr, const int& maxSize) :
     AVDecodeThread(ptr,maxSize)
 {
     m_params = params;
-    m_call = call;
+    m_videoPlay = call;
     m_synpts = 0;
     m_isPause = false;
 }
@@ -30,7 +30,7 @@ bool AVVideoThread::Open(int width, int height)
     Clear();
     
     std::lock_guard<std::mutex> lock(m_videoMutex);
-    if (m_call) m_call->Init(width, height);
+    if (m_videoPlay) m_videoPlay->Init(width, height);
     
     bool ret = m_decode->Open(m_params);
     return ret;
@@ -63,7 +63,7 @@ void AVVideoThread::StartVideoThread()
         while (!m_isExit) {
             AVModeFrame *mFrame = m_decode->RecvFrame();
             if (!mFrame) break;
-            if (m_call) m_call->Repaint(mFrame->frame());
+            if (m_videoPlay) m_videoPlay->Repaint(mFrame->frame());
         }
     }
 }

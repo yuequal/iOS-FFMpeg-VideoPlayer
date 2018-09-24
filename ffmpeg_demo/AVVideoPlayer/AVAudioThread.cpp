@@ -7,3 +7,8 @@
 //
 
 #include "AVAudioThread.hpp"
+
+namespace AVVideoPlayer {
+    
+
+}

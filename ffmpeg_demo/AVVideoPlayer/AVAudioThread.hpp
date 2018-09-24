@@ -17,7 +17,7 @@ namespace AVVideoPlayer {
     class AVAudioThread : public AVDecodeThread
     {
     public:
-        AVAudioThread(AVCodecParameters *params, AVVideoCall *call, const AVDecodePtr& ptr, const int& maxSize);
+        AVAudioThread(AVCodecParameters *params, const std::shared_ptr<AVAudioPlay>& play, const AVDecodePtr& ptr, const int& maxSize);
         virtual ~AVAudioThread();
         
     public:
@@ -31,8 +31,8 @@ namespace AVVideoPlayer {
         long long pts = 0;
     private:
         std::mutex m_audioMutex;
-        AVVideoCall *m_call = nullptr;
         AVCodecParameters *m_params = nullptr;
+        std::shared_ptr<AVAudioPlay> m_audioPlay;
     };
 }
     

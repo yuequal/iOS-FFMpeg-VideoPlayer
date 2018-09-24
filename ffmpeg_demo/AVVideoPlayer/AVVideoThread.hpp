@@ -17,7 +17,7 @@ namespace AVVideoPlayer {
     {
         
     public:
-        AVVideoThread(AVCodecParameters* params, AVVideoCall* call, const AVDecodePtr& ptr, const int& maxSize);
+        AVVideoThread(AVCodecParameters* params, AVVideoPLay* call, const AVDecodePtr& ptr, const int& maxSize);
         virtual ~AVVideoThread();
     public:
         virtual bool Open(int width, int height);
@@ -30,7 +30,7 @@ namespace AVVideoPlayer {
         long long m_synpts = 0;
     private:
         std::mutex m_videoMutex;
-        AVVideoCall *m_call = nullptr;
+        AVVideoPLay *m_videoPlay = nullptr;
         AVCodecParameters *m_params = nullptr;
     };
 }

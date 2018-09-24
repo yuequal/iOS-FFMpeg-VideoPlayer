@@ -40,7 +40,7 @@ void AVDemuxThread::SetPause(bool isPause)
 void AVDemuxThread::StartDemux(const char *url, const AVDemuxCallBack& cb, void *context)
 {}
 
-bool AVDemuxThread::Open(const char *url, AVVideoCall *videoCall)
+bool AVDemuxThread::Open(const char *url, AVVideoPLay *videoCall)
 {
     return false;
 }

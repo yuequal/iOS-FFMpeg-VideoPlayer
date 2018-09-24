@@ -18,7 +18,7 @@ extern "C"{
 
 namespace AVVideoPlayer {
   
-    class AVVideoCall
+    class AVVideoPLay
     {
     public:
         virtual void Init(long width, long height) = 0;

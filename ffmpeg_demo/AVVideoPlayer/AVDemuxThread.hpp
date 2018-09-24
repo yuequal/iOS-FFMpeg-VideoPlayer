@@ -25,7 +25,7 @@ namespace AVVideoPlayer {
         void StartDemux(const char *url, const AVDemuxCallBack& cb, void *context);
 
     public:
-        virtual bool Open(const char *url, AVVideoCall* call);
+        virtual bool Open(const char *url, AVVideoPLay* call);
 
         virtual void Start();
         virtual void Clear();
