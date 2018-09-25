@@ -16,82 +16,99 @@ extern "C"{
 }
 
 namespace AVVideoPlayer {
-    template <typename T>
-    class AVPacketQueue
-    {
-    public:
-        AVPacketQueue(const AVPacketQueue&) = delete;
-        AVPacketQueue& operator=(const AVPacketQueue &) = delete;
-        
-    public:
-        AVPacketQueue(unsigned int maxSize = 10); //默认队列最大帧包为10个
-        ~AVPacketQueue();
-        
-    public:
-        void SetSize(unsigned int size);
-        bool Push(T *t);
-        bool Empty() const;
-        T *Pop();
-        
-    private:
-        std::mutex m_mutex;
-        std::list<T *> m_buffer;
-        unsigned int m_bufferSize = 0;
-        std::condition_variable m_condition;
-    };
+template <typename T>
+class AVPacketQueue
+{
+public:
+    AVPacketQueue(const AVPacketQueue&) = delete;
+    AVPacketQueue& operator=(const AVPacketQueue &) = delete;
     
-    template <typename T>
-    AVPacketQueue<T>::AVPacketQueue(unsigned int maxSize)
-    {
-        this->m_bufferSize = maxSize;
-    }
+public:
+    AVPacketQueue(unsigned int maxSize = 10); //默认队列最大帧包为10个
+    ~AVPacketQueue();
     
-    template <typename T>
-    AVPacketQueue<T>::~AVPacketQueue()
-    {
-        std::unique_lock<std::mutex> lock(m_mutex);
-        m_condition.wait(lock, [this]{ return this->Empty(); });
-        while (!m_buffer.empty()) {
-            AVPacket *packet = m_buffer.front();
-            av_packet_unref(packet);
-            av_packet_free(&packet);
-            m_buffer.pop_front();
-        }
-    }
+public:
+    void ResetSize(unsigned int size);
+    bool Push(T *t);
+    bool Empty() const;
+    void Clear();
+    T *Pop();
     
-    template <typename T>
-    T * AVPacketQueue<T>::Pop()
-    {
-        std::unique_lock<std::mutex> lock(m_mutex);
-        m_condition.wait(lock, [this]{ return this->Empty(); });
-        if (m_buffer.empty()) {
-            T *packet(nullptr);
-            return packet;
-        }
-        T *packet = m_buffer.front();
+private:
+    std::mutex m_mutex;
+    std::list<T *> m_buffer;
+    unsigned int m_bufferSize = 0;
+    std::condition_variable m_condition;
+};
+
+template <typename T>
+AVPacketQueue<T>::AVPacketQueue(unsigned int maxSize)
+{
+    this->m_bufferSize = maxSize;
+}
+
+template <typename T>
+void AVPacketQueue<T>::ResetSize(unsigned int size)
+{
+    this->m_bufferSize = size;
+}
+
+template <typename T>
+AVPacketQueue<T>::~AVPacketQueue()
+{
+    std::unique_lock<std::mutex> lock(m_mutex);
+    while (!m_buffer.empty()) {
+        AVPacket *packet = m_buffer.front();
+        av_packet_unref(packet);
+        av_packet_free(&packet);
         m_buffer.pop_front();
+    }
+}
+    
+template <typename T>
+void AVPacketQueue<T>::Clear()
+{
+    std::unique_lock<std::mutex> lock(m_mutex);
+    while (!m_buffer.empty()) {
+        T *packet = m_buffer.front();
+        delete packet;
+        m_buffer.pop_front();
+    }
+}
+
+template <typename T>
+T * AVPacketQueue<T>::Pop()
+{
+    std::unique_lock<std::mutex> lock(m_mutex);
+    m_condition.wait(lock, [this]{ return !this->Empty(); });
+    if (m_buffer.empty()) {
+        T *packet(nullptr);
         return packet;
     }
-    
-    template <typename T>
-    bool AVPacketQueue<T>::Push(T *t)
-    {
-        std::unique_lock<std::mutex> lock(m_mutex);
-        if (m_buffer.size() > m_bufferSize) {
-            return false;
-        }
-        m_buffer.push_back(t);
-        lock.unlock();
-        m_condition.notify_one();
-        return true;
+    T *packet = m_buffer.front();
+    m_buffer.pop_front();
+    return packet;
+}
+
+template <typename T>
+bool AVPacketQueue<T>::Push(T *t)
+{
+    std::unique_lock<std::mutex> lock(m_mutex);
+    if (m_buffer.size() > m_bufferSize) {
+        return false;
     }
-    
-    template <typename T>
-    bool AVPacketQueue<T>::Empty() const
-    {
-        std::unique_lock<std::mutex> lock(m_mutex);
-        return m_buffer.empty();
-    }
+    m_buffer.push_back(t);
+    lock.unlock();
+    m_condition.notify_one();
+    return true;
+}
+
+template <typename T>
+bool AVPacketQueue<T>::Empty() const
+{
+    std::unique_lock<std::mutex> lock(m_mutex);
+    return m_buffer.empty();
+}
 }
 
 #endif /* AVPacketQueue_hpp */
