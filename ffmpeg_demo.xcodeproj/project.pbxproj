@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C0100B7E214B9B7D006563FD /* AVVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0100B7D214B9B7D006563FD /* AVVideoPlayerController.m */; };
+		C0463A4E216CB15600C6C0E8 /* AVNotificationListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0463A4D216CB15600C6C0E8 /* AVNotificationListener.mm */; };
+		C054C00021607D89009107A9 /* AVVideoPlayerInternal.mm in Sources */ = {isa = PBXBuildFile; fileRef = C054BFFF21607D89009107A9 /* AVVideoPlayerInternal.mm */; };
 		C072410B2158A0DD0022A6A0 /* AVAudioThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C07240F92158A0DD0022A6A0 /* AVAudioThread.cpp */; };
 		C072410C2158A0DD0022A6A0 /* AVDemux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C07240FA2158A0DD0022A6A0 /* AVDemux.cpp */; };
 		C072410D2158A0DD0022A6A0 /* AVVideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C07241022158A0DD0022A6A0 /* AVVideoPlayer.cpp */; };
@@ -76,6 +78,10 @@
 /* Begin PBXFileReference section */
 		C0100B7C214B9B7D006563FD /* AVVideoPlayerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVVideoPlayerController.h; sourceTree = "<group>"; };
 		C0100B7D214B9B7D006563FD /* AVVideoPlayerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVVideoPlayerController.m; sourceTree = "<group>"; };
+		C0463A4C216CB15600C6C0E8 /* AVNotificationListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVNotificationListener.h; sourceTree = "<group>"; };
+		C0463A4D216CB15600C6C0E8 /* AVNotificationListener.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AVNotificationListener.mm; sourceTree = "<group>"; };
+		C054BFFE21607D89009107A9 /* AVVideoPlayerInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVVideoPlayerInternal.h; sourceTree = "<group>"; };
+		C054BFFF21607D89009107A9 /* AVVideoPlayerInternal.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AVVideoPlayerInternal.mm; sourceTree = "<group>"; };
 		C07240F92158A0DD0022A6A0 /* AVAudioThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AVAudioThread.cpp; sourceTree = "<group>"; };
 		C07240FA2158A0DD0022A6A0 /* AVDemux.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AVDemux.cpp; sourceTree = "<group>"; };
 		C07240FB2158A0DD0022A6A0 /* AVVideoPlayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AVVideoPlayer.hpp; sourceTree = "<group>"; };
@@ -361,6 +367,10 @@
 				C08EE6B42144C87000B79D34 /* AVViewController.mm */,
 				C0100B7C214B9B7D006563FD /* AVVideoPlayerController.h */,
 				C0100B7D214B9B7D006563FD /* AVVideoPlayerController.m */,
+				C054BFFE21607D89009107A9 /* AVVideoPlayerInternal.h */,
+				C054BFFF21607D89009107A9 /* AVVideoPlayerInternal.mm */,
+				C0463A4C216CB15600C6C0E8 /* AVNotificationListener.h */,
+				C0463A4D216CB15600C6C0E8 /* AVNotificationListener.mm */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -762,6 +772,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C072410E2158A0DD0022A6A0 /* AVDecodeThread.cpp in Sources */,
+				C0463A4E216CB15600C6C0E8 /* AVNotificationListener.mm in Sources */,
 				C0F22AC42142689C006AF382 /* ViewController.mm in Sources */,
 				C072410F2158A0DD0022A6A0 /* AVVideoThread.cpp in Sources */,
 				C0F22ACF2142689E006AF382 /* main.m in Sources */,
@@ -773,6 +784,7 @@
 				C0100B7E214B9B7D006563FD /* AVVideoPlayerController.m in Sources */,
 				C0F22AC12142689C006AF382 /* AppDelegate.m in Sources */,
 				C072410C2158A0DD0022A6A0 /* AVDemux.cpp in Sources */,
+				C054C00021607D89009107A9 /* AVVideoPlayerInternal.mm in Sources */,
 				C072410B2158A0DD0022A6A0 /* AVAudioThread.cpp in Sources */,
 				C07241112158A0DD0022A6A0 /* AVDemuxThread.cpp in Sources */,
 				C072410D2158A0DD0022A6A0 /* AVVideoPlayer.cpp in Sources */,

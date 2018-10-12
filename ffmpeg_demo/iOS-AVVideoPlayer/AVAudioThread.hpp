@@ -17,7 +17,11 @@ namespace AVVideoPlayer {
     class AVAudioThread : public AVDecodeThread
     {
     public:
-        AVAudioThread(AVCodecParameters *params, const std::shared_ptr<AVAudioPlay>& play, const AVDecodePtr& ptr, const int& maxSize);
+        AVAudioThread(
+          AVCodecParameters *params,
+          const std::shared_ptr<AVAudioPlay>& play,
+          const AVVideoPlayer::AVDecodePtr& ptr,
+          const int& maxSize);
         virtual ~AVAudioThread();
         
     public:
@@ -28,7 +32,7 @@ namespace AVVideoPlayer {
         
     public:
         std::atomic<bool> m_isPause;
-        long long pts = 0;
+        long long m_pts = 0;
     private:
         std::mutex m_audioMutex;
         AVCodecParameters *m_params = nullptr;

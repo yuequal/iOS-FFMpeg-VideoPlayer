@@ -22,6 +22,7 @@ namespace AVVideoPlayer {
     public:
         virtual bool Open(int width, int height);
         
+        void Start();
         void StartVideoThread();
         void SetPause(bool isPause);
         

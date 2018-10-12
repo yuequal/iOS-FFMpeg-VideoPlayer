@@ -16,8 +16,10 @@
 @interface ViewController ()
 {
     std::shared_ptr<AVVideoPlayer::AVDemux> m_demux;
- //   std::shared_ptr<AVVideoPlayer::AVDemuxThread> m_demuxThread;
+    std::shared_ptr<AVVideoPlayer::AVDemuxThread> m_demuxThread;
     std::shared_ptr<AVVideoPlayer::AVDecode> m_decode;
+    std::thread m_decodeThread;
+    std::thread demuxTh;
 }
 @end
 
@@ -27,8 +29,9 @@
     [super viewDidLoad];
     
     const char *file = [[[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"] UTF8String];
-    AVVideoPlayer::AVDemux demux;
-    m_demux = std::shared_ptr<AVVideoPlayer::AVDemux>(new AVVideoPlayer::AVDemux());
+    AVFormatContext *ctx = avformat_alloc_context();
+    AVVideoPlayer::AVDemux demux(ctx);
+    m_demux = std::shared_ptr<AVVideoPlayer::AVDemux>(&demux);
     bool success = m_demux->Open(file);
     if (success) {
         AVPacket* packet = m_demux->Read();
@@ -47,6 +50,8 @@
     
     AVVideoPlayer::AVDemuxThread m_demuxThread;
     m_demuxThread.StartDemux(file, nullptr, (__bridge void *)self);
+
+   
     
 }
 

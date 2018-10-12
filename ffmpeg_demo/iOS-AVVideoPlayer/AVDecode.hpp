@@ -35,6 +35,8 @@ public:
     
     virtual AVModeFrame* RecvFrame();
     
+    AVCodecContext *codecContext() const;
+    
     virtual void Close();
     
     virtual void Clear();
@@ -44,7 +46,7 @@ public:
     virtual ~AVDecode();
     
 protected:
-    AVCodecContext *m_codecContext = 0;
+    AVCodecContext *m_codecContext { nullptr };
     std::mutex m_mutex;
 };
     

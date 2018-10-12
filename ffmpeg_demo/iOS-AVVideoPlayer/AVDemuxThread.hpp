@@ -11,10 +11,11 @@
 
 #include "AVDemux.hpp"
 #include "AVPlayerProtocol.hpp"
+#include "AVVideoThread.hpp"
 #include <thread>
 namespace AVVideoPlayer {
 
-    using AVDemuxCallBack = std::function<int(int, void *)>;
+    using AVDemuxCallBack = std::function<void(int, void *)>;
 
     class AVDemuxThread {
 
@@ -33,17 +34,22 @@ namespace AVVideoPlayer {
 
         void DemuxThread();
         void SetPause(bool isPause);
+        void SetThreadName(const char *name);
 
     public:
-        std::atomic<bool> m_isExit;
-        std::atomic<bool> m_isPause;
+        enum class AVState { AVSleep, AVRun, AVPause };
+        std::atomic<AVState> m_state { AVState::AVPause };
+    
         long long m_pts = 0;
         long long m_totalMills = 0;
-
+ 
     protected:
+        const char *m_fileUrl = 0;
+        AVVideoPLay *m_videoPlay = 0;
         std::mutex m_mutex;
         std::thread m_demuxThread;
-        std::unique_ptr<AVDemux> m_demux;
+        std::shared_ptr<AVDemux> m_demux;
+        std::shared_ptr<AVVideoThread> m_videoThread;
     };
 }
 

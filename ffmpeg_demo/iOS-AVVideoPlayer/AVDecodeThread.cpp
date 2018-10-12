@@ -20,7 +20,7 @@ AVDecodeThread::~AVDecodeThread()
 {
     this->m_isExit = false;
 }
-
+    
 void AVDecodeThread::Close()
 {
     Clear();

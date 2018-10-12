@@ -17,18 +17,17 @@ static double r2d(AVRational r)
     return r.den == 0 ? 0 : (double)r.num / (double)r.den;
 }
 
-AVDemux::AVDemux()
+AVDemux::AVDemux(AVFormatContext *formatContext)
 {
-    static bool isFirst = true;
-    static std::mutex demuext;
-    demuext.lock();
-    if (isFirst) {
+    static std::once_flag onceFlag;
+    std::call_once(
+        onceFlag,
+        [this,formatContext]()
+    {
         av_register_all();
-        
         avformat_network_init();
-        isFirst = false;
-    }
-    demuext.unlock();
+        m_formatContex = formatContext;
+    });
 }
 
 AVDemux::~AVDemux()
@@ -58,7 +57,7 @@ bool AVDemux::Open(const char *url)
         av_strerror(ret, buff, sizeof(buff) - 1);
         return false;
     }
-    
+
     ret = avformat_find_stream_info(m_formatContex, 0);
     this->totalMills = m_formatContex->duration / (AV_TIME_BASE / 1000);
     
@@ -88,8 +87,8 @@ AVPacket* AVDemux::Read()
     AVPacket *packet = av_packet_alloc();
     
     int ret = av_read_frame(m_formatContex, packet);
+    m_mutex.unlock();
     if (ret != 0) {
-        m_mutex.unlock();
         av_packet_free(&packet);
         return NULL;
     }
@@ -127,31 +126,40 @@ AVCodecParameters* AVDemux::CopyAudioParams()
 
 AVCodecParameters* AVDemux::CopyVideoParams()
 {
-    m_mutex.lock();
-    if (!m_formatContex) {
-        m_mutex.unlock();
-        return NULL;
-    }
+    std::lock_guard<std::mutex> lock(m_mutex);
+    if (!m_formatContex) return nullptr;
     AVCodecParameters *paras = avcodec_parameters_alloc();
     AVCodecParameters *sp = m_formatContex->streams[videoStream]->codecpar;
     int ret = avcodec_parameters_copy(paras, static_cast<const AVCodecParameters *>(sp));
     if (ret < 0) {
-        m_mutex.unlock();
         avcodec_parameters_free(&paras);
         return NULL;
     }
-    m_mutex.unlock();
     return paras;
+}
+    
+AVFormatContext * AVDemux::FormatContext() const
+{
+    return m_formatContex;
+}
+
+int AVDemux::VStreamIndex() const
+{
+    return videoStream;
 }
 
 void AVDemux::Clear()
 {
-    
+    std::lock_guard<std::mutex> lock(m_mutex);
+    if (!m_formatContex) return;
+    avformat_flush(m_formatContex);
 }
 
 void AVDemux::Close()
 {
-    
+    std::lock_guard<std::mutex> lock(m_mutex);
+    if (!m_formatContex) return;
+    avformat_close_input(&m_formatContex);
 }
 
 bool AVDemux::Seek(double pos)

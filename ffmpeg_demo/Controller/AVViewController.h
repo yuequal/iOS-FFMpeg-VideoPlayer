@@ -8,18 +8,33 @@
 
 #import <UIKit/UIKit.h>
 
+NSString * const AVVideoPlayerDidBeginEditingNotification =         @"AVVideoPlayerDidBeginEditingNotification";
+NSString * const AVVideoPlayerDidChangeNotification =               @"AVVideoPlayerDidChangeNotification";
+NSString * const AVVideoPlayerWillResignNotification = @"AVVideoPlayerWillResignNotification";
+
 @class AVViewController;
 
 @protocol AVViewControllerDelegate <NSObject>
 
 @optional
-- (void)videoplayerTime:(AVViewController *)viewcontroller bitRate:(int)bitRate;
+
+- (void)AVideoPlayerControllerTimeWillLoading:(AVViewController *)controller;
+
+- (void)AVideoPlayerControllerTime:(AVViewController *)viewcontroller bitRate:(int)bitRate;
 
 @end
 
 @interface AVViewController : UIViewController
 
 @property (nonatomic,readonly) CGFloat duration;
+
+- (void)play;
+
+- (void)restart;
+
+- (void)prepareToPlay;
+
+- (void)openUrl:(NSString *)url;
 
 - (void)setPause:(BOOL)isPause;
 
@@ -28,3 +43,4 @@
 - (void)setDelegate:(id<AVViewControllerDelegate>)delegate;
 
 @end
+

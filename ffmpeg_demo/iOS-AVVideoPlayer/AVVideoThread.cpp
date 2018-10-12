@@ -10,8 +10,12 @@
 
 namespace AVVideoPlayer {
     
-    AVVideoThread::AVVideoThread(AVCodecParameters *params, AVVideoPLay *call, const AVDecodePtr& ptr, const int& maxSize) :
-    AVDecodeThread(ptr,maxSize)
+AVVideoThread::AVVideoThread(
+AVCodecParameters *params,
+AVVideoPLay *call,
+const AVDecodePtr& ptr,
+const int& maxSize) :
+AVDecodeThread(ptr,maxSize)
 {
     m_params = params;
     m_videoPlay = call;
@@ -40,31 +44,21 @@ void AVVideoThread::SetPause(bool isPause)
 {
     m_isPause = isPause;
 }
-    
+
+void AVVideoThread::Start()
+{
+    m_decodeThread = std::thread([this](){
+        pthread_setname_np("com.avvideothread");
+        this->StartVideoThread();
+    });
+}
 
 void AVVideoThread::StartVideoThread()
 {
-    while (!m_isExit.load()) {
-        std::unique_lock<std::mutex> lock(m_videoMutex);
-        m_decodeThreadCond.wait(lock, [&]{
-            return m_isPause.load();
-        });
-        m_decodeThreadCond.wait(lock, [&]{
-            return m_synpts >0 && m_synpts < m_decode->pts;
-        });
+    while (true) {
+        AVPacket *pkt = Pop();
+        if (!pkt) continue;
         
-        AVPacket *packet = Pop();
-        bool ret = m_decode->Send(packet);
-        if (!ret) {
-            lock.unlock();
-            continue;
-        }
-        
-        while (!m_isExit) {
-            AVModeFrame *mFrame = m_decode->RecvFrame();
-            if (!mFrame) break;
-            if (m_videoPlay) m_videoPlay->Repaint(mFrame->frame());
-        }
     }
 }
     

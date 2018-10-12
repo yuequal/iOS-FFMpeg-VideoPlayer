@@ -103,6 +103,11 @@ AVModeFrame* AVDecode::RecvFrame()
     frame = nullptr;
     return mFrame;
 }
+    
+AVCodecContext * AVDecode::codecContext() const
+{
+    return m_codecContext;
+}
 
 AVDecode::AVDecode()
 {

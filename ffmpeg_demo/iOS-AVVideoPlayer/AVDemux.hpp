@@ -23,14 +23,14 @@ namespace AVVideoPlayer {
     class AVDemux {
         
     public:
-        AVDemux();
+        AVDemux(AVFormatContext *formatContext);
         virtual ~AVDemux();
         
     public:
         
-        void Start();
-        
         virtual bool Open(const char *url);
+        
+        void Start();
         
         virtual AVPacket *Read();
         
@@ -45,6 +45,12 @@ namespace AVVideoPlayer {
         virtual void Clear();
         
         virtual void Close();
+        
+        int VStreamIndex() const;
+        
+        int AStreamIndex() const;
+        
+        AVFormatContext *FormatContext() const;
         
     public:
         
