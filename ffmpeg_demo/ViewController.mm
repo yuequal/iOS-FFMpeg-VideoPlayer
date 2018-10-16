@@ -19,7 +19,7 @@
     std::shared_ptr<AVVideoPlayer::AVDemuxThread> m_demuxThread;
     std::shared_ptr<AVVideoPlayer::AVDecode> m_decode;
     std::thread m_decodeThread;
-    std::thread demuxTh;
+    std::thread m_readFrameThread;
 }
 @end
 
@@ -30,23 +30,44 @@
     
     const char *file = [[[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"] UTF8String];
     AVFormatContext *ctx = avformat_alloc_context();
-    AVVideoPlayer::AVDemux demux(ctx);
-    m_demux = std::shared_ptr<AVVideoPlayer::AVDemux>(&demux);
+  //  AVVideoPlayer::AVDemux demux(ctx);
+    m_demux = std::make_shared<AVVideoPlayer::AVDemux>(ctx);
     bool success = m_demux->Open(file);
     if (success) {
         AVPacket* packet = m_demux->Read();
-        std::cout << packet->size << packet->pts << std::endl;
-        av_packet_free(&packet);
+        std::cout << "-- size: "<<packet->size << " -- pts: "<< packet->pts << std::endl;
+      //  av_packet_free(&packet);
     }
+
     m_demux->Start();
     AVVideoPlayer::AVDecode decode;
     m_decode = std::shared_ptr<AVVideoPlayer::AVDecode>(new AVVideoPlayer::AVDecode());
     AVCodecParameters *paras = m_demux->CopyVideoParams();
     success = m_decode->Open(paras);
-    success = m_decode->Send(m_demux->Read());
     
-    std::shared_ptr<AVFrame> frame = m_decode->RecvFrame()->frame();
-    std::cout << frame->linesize[0] << "--- size :" << frame->pkt_size << " pts :"<< frame->pts << "  dts:" << frame->pkt_dts << std::endl;
+    m_decodeThread = std::thread([self](){
+        while (true) {
+            AVPacket *packet = m_demux->Read();
+            std::cout<< packet->size << packet->pts << std::endl;
+            bool success = m_decode->Send(packet);
+            if (!success) continue;
+            AVVideoPlayer::AVModeFrame *modeFrame = m_decode->RecvFrame();
+            if (!modeFrame) continue;
+            std::shared_ptr<AVFrame> frame = m_decode->RecvFrame()->frame();
+            if (!frame) continue;
+            std::cout << frame->linesize[0] << "--- size :" << frame->pkt_size << " pts :"<< frame->pts << "  dts:" << frame->pkt_dts << std::endl;
+        }
+    });
+    
+    m_readFrameThread = std::thread([self](){
+        while (true) {
+            AVVideoPlayer::AVModeFrame *modeFrame = m_decode->RecvFrame();
+            if (!modeFrame) continue;
+            std::shared_ptr<AVFrame> frame = m_decode->RecvFrame()->frame();
+            if (!frame) continue;
+            std::cout << frame->linesize[0] << "--- size :" << frame->pkt_size << " pts :"<< frame->pts << "  dts:" << frame->pkt_dts << std::endl;
+        }
+    });
     
     AVVideoPlayer::AVDemuxThread m_demuxThread;
     m_demuxThread.StartDemux(file, nullptr, (__bridge void *)self);

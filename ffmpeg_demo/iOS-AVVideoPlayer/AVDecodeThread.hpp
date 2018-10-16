@@ -30,13 +30,17 @@ namespace AVVideoPlayer {
         virtual ~AVDecodeThread();
 
     public:
-        virtual void Push(AVPacket *packet);
+        virtual int32_t Push(AVPacket *packet);
         
         virtual void Clear();
         
         virtual void Close();
         
+        virtual bool Empty() ;
+        
         virtual AVPacket *Pop();
+        
+        virtual int32_t Size();
         
     public:
         int maxLimit = 10;

@@ -32,23 +32,21 @@ AVDemux::AVDemux(AVFormatContext *formatContext)
 
 AVDemux::~AVDemux()
 {
-    
+
 }
     
 void AVDemux::Start()
 {
     m_demuxThread = std::thread([this](){
         pthread_setname_np("com.videoplayer.demux");
-     //   AVCodecParameters *paras =  this->CopyVideoParams();
+        while (true) {
+        }
     });
-    
 }
-
+    
 bool AVDemux::Open(const char *url)
 {
     Close();
-    av_register_all();
-    avformat_network_init();
     m_mutex.lock();
     int ret = avformat_open_input(&m_formatContex, url, 0, 0);
     if (ret != 0) {
@@ -76,7 +74,7 @@ bool AVDemux::Open(const char *url)
     
     return true;
 }
-
+    
 AVPacket* AVDemux::Read()
 {
     m_mutex.lock();
@@ -95,7 +93,7 @@ AVPacket* AVDemux::Read()
     //set pts and dts
     packet->pts = packet->pts * (1000 * (r2d(m_formatContex->streams[packet->stream_index]->time_base)));
     packet->dts = packet->dts * (1000 * (r2d(m_formatContex->streams[packet->stream_index]->time_base)));
-    std::cout << packet->pts << "  " <<std::endl;
+//    std::cout << packet->pts << "  " <<std::endl;
     return packet;
 }
 
@@ -148,6 +146,11 @@ int AVDemux::VStreamIndex() const
     return videoStream;
 }
 
+int AVDemux::AStreamIndex() const
+{
+    return audioStream;
+}
+    
 void AVDemux::Clear()
 {
     std::lock_guard<std::mutex> lock(m_mutex);
@@ -164,6 +167,23 @@ void AVDemux::Close()
 
 bool AVDemux::Seek(double pos)
 {
-    return false;
+    m_mutex.lock();
+    if (!m_formatContex) {
+        m_mutex.unlock();
+        return false;
+    }
+    
+    avformat_flush(m_formatContex);
+    
+    AVStream *vStream = m_formatContex->streams[videoStream];
+    long long seekPos = vStream->duration * pos;
+    int ret = av_seek_frame(m_formatContex, videoStream, seekPos, AVSEEK_FLAG_FRAME | AVSEEK_FLAG_BACKWARD);
+    
+    if (ret < 0) {
+        m_mutex.unlock();
+        return false;
+    }
+    m_mutex.unlock();
+    return true;
 }
 }

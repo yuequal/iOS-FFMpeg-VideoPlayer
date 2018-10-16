@@ -7,8 +7,35 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AVVideoPlayerInternal.h"
+namespace AVVideoPlayer {
+    
+class AVVideoPlayerListener : public std::enable_shared_from_this<AVVideoPlayerListener> , public AVVideoPlayerSystemListener
+{
+    
+protected:
+    AVVideoPlayerListener(AVApplicationListener& listener);
+    virtual ~AVVideoPlayerListener();
+    
+    std::shared_ptr<AVVideoPlayerListener> SharedListener();
+    
+    friend std::unique_ptr<AVVideoPlayerSystemListener> AVVideoPlayerSystemListener::Create(AVApplicationListener& alistener);
+private:
+    id m_willResignObserver ;
+    id m_willEnterBackgroundObserver;
+    id m_didBecomeActiveObserver;
+};
 
-@interface AVNotificationListener : NSObject
+class AVPlayerNotificationListener : public AVVideoPlayerListener::AVApplicationListener
+{
+    
+public:
+    AVPlayerNotificationListener();
+    virtual ~AVPlayerNotificationListener();
+    
+    virtual void ApplicationWillResign();
+    virtual void ApplicationWillEnterBackground();
+    virtual void ApplicationDidBecomeActive();
+};
 
-@end
-
+}

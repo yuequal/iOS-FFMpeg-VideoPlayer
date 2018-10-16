@@ -23,6 +23,15 @@ namespace AVVideoPlayer {
     public:
         double Pts() const;
         void SetPts(double pts);
+        
+        int Width() const;
+        int Height() const;
+        
+        uint32_t Size() const;
+        
+        int64_t TimeStamp() const;
+        void SetTimeStamp(int64_t ts);
+        
         std::shared_ptr<AVFrame> frame() const;
         
         static AVModeFrame* createMFrame(AVFrame *frame);
@@ -31,6 +40,10 @@ namespace AVVideoPlayer {
         std::shared_ptr<AVFrame> m_avframe;
         double m_pts = 0.0;
         double m_duration = 0.0;
+        int64_t m_timeStamp;
+        uint32_t m_size;
+        int m_width = 0;
+        int m_height = 0;
     };
 }
 

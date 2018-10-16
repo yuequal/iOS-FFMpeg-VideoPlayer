@@ -69,13 +69,14 @@ AVVideoPlayerListener::AVVideoPlayerListener(AVApplicationListener& listener)
         }];
     }];
     
-    m_didBecomeActiveObserver = [center addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:mainQueue usingBlock:^(NSNotification * _Nonnull note) {
+    m_willResignObserver = [center addObserverForName:UIApplicationWillResignActiveNotification object:nil queue:mainQueue usingBlock:^(NSNotification * _Nonnull note) {
         auto strongSelf = weakSelf.lock();
         [AVDispatchQueue dispatchTaskAsyncOnMainQueue:^{
             if (strongSelf)
-                strongSelf->m_listener.ApplicationDidBecomeActive();
+                strongSelf->m_listener.ApplicationWillResign();
         }];
     }];
+    
 }
     
 AVVideoPlayerListener::~AVVideoPlayerListener()
