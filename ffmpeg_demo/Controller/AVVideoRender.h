@@ -55,9 +55,9 @@ private:
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype) new NS_UNAVAILABLE;
 
-- (instancetype)initWidth:(int)scaledWidth
-                   Height:(int)scaledHeight
-                timeStamp:(int64_t)timeStamp;
+- (instancetype)initWithModeFrame:(const AVVideoPlayer::AVModeFrame& )modeFrame;
+
+- (instancetype)initWidth:(int)scaledWidth Height:(int)scaledHeight timeStamp:(int64_t)timeStamp;
 @end
 
 @protocol AVVideoRender <NSObject>

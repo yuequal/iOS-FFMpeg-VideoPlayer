@@ -7,6 +7,7 @@
 //
 
 #import "AVVideoRender.h"
+#import "AVDispatchQueue.h"
 
 namespace AVVideoPlayer {
 
@@ -46,6 +47,13 @@ void AVVideoFrameRender::Destroy() {}
         _timeStamp = timeStamp;
     }
     return self;
+}
+
+- (instancetype)initWithModeFrame:(const AVVideoPlayer::AVModeFrame &)modeFrame
+{
+    return [self initWidth:modeFrame.Width()
+                    Height:modeFrame.Height()
+                 timeStamp:modeFrame.TimeStamp()];
 }
 
 @end

@@ -15,42 +15,42 @@
 #include <thread>
 namespace AVVideoPlayer {
 
-    using AVDemuxCallBack = std::function<void(int, void *)>;
+using AVDemuxCallBack = std::function<void(int, void *)>;
 
-    class AVDemuxThread {
+class AVDemuxThread {
 
-    public:
-        AVDemuxThread();
-        virtual ~AVDemuxThread();
+public:
+    AVDemuxThread();
+    virtual ~AVDemuxThread();
 
-        void StartDemux(const char *url, const AVDemuxCallBack& cb, void *context);
+    void StartDemux(const char *url, const AVDemuxCallBack& cb, void *context);
 
-    public:
-        virtual bool Open(const char *url, AVVideoPLay* call);
+public:
+    virtual bool Open(const char *url, AVVideoPLay* call);
 
-        virtual void Start();
-        virtual void Clear();
-        virtual void Seek(double pos);
+    virtual void Start();
+    virtual void Clear();
+    virtual void Seek(double pos);
 
-        void DemuxThread();
-        void SetPause(bool isPause);
-        void SetThreadName(const char *name);
+    void DemuxThread();
+    void SetPause(bool isPause);
+    void SetThreadName(const char *name);
 
-    public:
-        enum class AVState { AVSleep, AVRun, AVPause };
-        std::atomic<AVState> m_state { AVState::AVPause };
-    
-        long long m_pts = 0;
-        long long m_totalMills = 0;
- 
-    protected:
-        const char *m_fileUrl = 0;
-        AVVideoPLay *m_videoPlay = 0;
-        std::mutex m_mutex;
-        std::thread m_demuxThread;
-        std::shared_ptr<AVDemux> m_demux;
-        std::shared_ptr<AVVideoThread> m_videoThread;
-    };
+public:
+    enum class AVState { AVSleep, AVRun, AVPause };
+    std::atomic<AVState> m_state { AVState::AVPause };
+
+    long long m_pts = 0;
+    long long m_totalMills = 0;
+
+protected:
+    const char *m_fileUrl = 0;
+    AVVideoPLay *m_videoPlay = 0;
+    std::mutex m_mutex;
+    std::thread m_demuxThread;
+    std::shared_ptr<AVDemux> m_demux;
+    std::shared_ptr<AVVideoThread> m_videoThread;
+};
 }
 
 #endif /* AVDemuxThread_hpp */

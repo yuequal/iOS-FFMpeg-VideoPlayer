@@ -49,32 +49,43 @@ AVVideoPlayerListener::AVVideoPlayerListener(AVApplicationListener& listener)
     , m_didBecomeActiveObserver(nil)
 {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
     
     std::weak_ptr<AVVideoPlayerListener> weakSelf = SharedListener();
     
-    m_didBecomeActiveObserver = [center addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        auto strongSelf = weakSelf.lock();
-        [AVDispatchQueue dispatchTaskAsyncOnMainQueue:^{
-            if (strongSelf)
-                strongSelf->m_listener.ApplicationDidBecomeActive();
-        }];
+    m_didBecomeActiveObserver =
+    [center addObserverForName:UIApplicationDidBecomeActiveNotification
+                        object:nil
+                         queue:nil
+                    usingBlock:^(NSNotification * _Nonnull note) {
+                        auto strongSelf = weakSelf.lock();
+                        [AVDispatchQueue dispatchTaskAsyncOnMainQueue:^{
+                            if (strongSelf)
+                                strongSelf->m_listener.ApplicationDidBecomeActive();
+                        }];
     }];
     
-    m_willEnterBackgroundObserver = [center addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil queue:mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        auto strongSelf = weakSelf.lock();
-        [AVDispatchQueue dispatchTaskAsyncOnMainQueue:^{
-            if (strongSelf)
-                strongSelf->m_listener.ApplicationWillEnterBackground();
-        }];
+    m_willEnterBackgroundObserver =
+    [center addObserverForName:UIApplicationDidEnterBackgroundNotification
+                        object:nil
+                         queue:nil
+                    usingBlock:^(NSNotification * _Nonnull note) {
+                        auto strongSelf = weakSelf.lock();
+                        [AVDispatchQueue dispatchTaskAsyncOnMainQueue:^{
+                            if (strongSelf)
+                                strongSelf->m_listener.ApplicationWillEnterBackground();
+                        }];
     }];
     
-    m_willResignObserver = [center addObserverForName:UIApplicationWillResignActiveNotification object:nil queue:mainQueue usingBlock:^(NSNotification * _Nonnull note) {
-        auto strongSelf = weakSelf.lock();
-        [AVDispatchQueue dispatchTaskAsyncOnMainQueue:^{
-            if (strongSelf)
-                strongSelf->m_listener.ApplicationWillResign();
-        }];
+    m_willResignObserver =
+    [center addObserverForName:UIApplicationWillResignActiveNotification
+                        object:nil
+                         queue:nil
+                    usingBlock:^(NSNotification * _Nonnull note) {
+                        auto strongSelf = weakSelf.lock();
+                        [AVDispatchQueue dispatchTaskAsyncOnMainQueue:^{
+                            if (strongSelf)
+                                strongSelf->m_listener.ApplicationWillResign();
+                        }];
     }];
     
 }

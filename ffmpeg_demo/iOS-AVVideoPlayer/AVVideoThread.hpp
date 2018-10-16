@@ -13,27 +13,27 @@
 #include "AVPlayerProtocol.hpp"
 #include <mutex>
 namespace AVVideoPlayer {
-    class AVVideoThread : public AVDecodeThread
-    {
-        
-    public:
-        AVVideoThread(AVCodecParameters* params, AVVideoPLay* call, const AVDecodePtr& ptr, const int& maxSize);
-        virtual ~AVVideoThread();
-    public:
-        virtual bool Open(int width, int height);
-        
-        void Start();
-        void StartVideoThread();
-        void SetPause(bool isPause);
-        
-    public:
-        std::atomic<bool> m_isPause;
-        long long m_synpts = 0;
-    private:
-        std::mutex m_videoMutex;
-        AVVideoPLay *m_videoPlay = nullptr;
-        AVCodecParameters *m_params = nullptr;
-    };
+class AVVideoThread : public AVDecodeThread
+{
+    
+public:
+    AVVideoThread(AVCodecParameters* params, AVVideoPLay* call, const AVDecodePtr& ptr, const int& maxSize);
+    virtual ~AVVideoThread();
+public:
+    virtual bool Open(int width, int height);
+    
+    void Start();
+    void StartVideoThread();
+    void SetPause(bool isPause);
+    
+public:
+    std::atomic<bool> m_isPause;
+    long long m_synpts = 0;
+private:
+    std::mutex m_videoMutex;
+    AVVideoPLay *m_videoPlay = nullptr;
+    AVCodecParameters *m_params = nullptr;
+};
 }
 
 #endif /* AVVideoThread_hpp */

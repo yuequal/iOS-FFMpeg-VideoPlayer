@@ -13,35 +13,35 @@
 #include "AVDemuxThread.hpp"
 namespace AVVideoPlayer {
     
-    enum class AVVideoPlayerFlag {
-        AVVideoPlayerDone,
-        AVVideoPlayerPending,
-        AVVideoPlayerFailed
-    };
+enum class AVVideoPlayerFlag {
+    AVVideoPlayerDone,
+    AVVideoPlayerPending,
+    AVVideoPlayerFailed
+};
+
+class AVVideoPlayer : public std::enable_shared_from_this<AVVideoPlayer>
+{
+public:
+    AVVideoPlayer();
+    ~AVVideoPlayer();
+    bool Open(const char *url);
+    void Play();
+    void SetPause(bool pause);
+    void SeekToTime(double pos);
+    void Prepare();
+    void Loading();
+    void Restart();
+    double Duration() const;
     
-    class AVVideoPlayer : public std::enable_shared_from_this<AVVideoPlayer>
-    {
-    public:
-        AVVideoPlayer();
-        ~AVVideoPlayer();
-        bool Open(const char *url);
-        void Play();
-        void SetPause(bool pause);
-        void SeekToTime(double pos);
-        void Prepare();
-        void Loading();
-        void Restart();
-        double Duration() const;
-        
-    private:
-        double m_duration = 0.0;
-        std::shared_ptr<AVDemuxThread> m_demuxThread;
-        std::shared_ptr<AVDemux> m_demux;
-        std::shared_ptr<AVDecode> m_decode;
-        std::unique_ptr<AVVideoPLay> m_videoPlay;
-        AVPacketQueue<AVPacket> m_videoPacketQueue;
-        AVPacketQueue<AVPacket> m_audioPacketQueue;
-    };
+private:
+    double m_duration = 0.0;
+    std::shared_ptr<AVDemuxThread> m_demuxThread;
+    std::shared_ptr<AVDemux> m_demux;
+    std::shared_ptr<AVDecode> m_decode;
+    std::unique_ptr<AVVideoPLay> m_videoPlay;
+    AVPacketQueue<AVPacket> m_videoPacketQueue;
+    AVPacketQueue<AVPacket> m_audioPacketQueue;
+};
 }
 
 #endif /* AVVideoPlayer_hpp */
