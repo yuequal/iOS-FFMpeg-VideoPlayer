@@ -20,9 +20,9 @@ class AVVideoRenderImpl
 public:
     virtual ~AVVideoRenderImpl() = default;
     
-    virtual void InitFrame(const VideoFrame& frame) = 0;
+    virtual void RenderFrame(const VideoFrame* frame) = 0;
     
-    virtual void Destroy() = 0;
+    virtual void DestroyRender() = 0;
 };
 
 class AVVideoFrameRender : public AVVideoRenderImpl<AVModeFrame>
@@ -30,9 +30,9 @@ class AVVideoFrameRender : public AVVideoRenderImpl<AVModeFrame>
 public:
     AVVideoFrameRender(id<AVVideoRender> render);
     
-    void InitFrame(const AVModeFrame& frame);
+    void RenderFrame(const AVModeFrame* frame);
     
-    void Destroy();
+    void DestroyRender();
     
 public:
     std::unique_ptr<AVVideoRenderImpl<AVModeFrame>> Create(id<AVVideoRender> render);

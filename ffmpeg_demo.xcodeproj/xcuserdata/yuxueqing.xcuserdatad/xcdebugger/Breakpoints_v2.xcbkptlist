@@ -26,7 +26,7 @@
                   moduleName = "ffmpeg_demo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yuxueqing/Desktop/iOS-FFMpeg-VideoPlayer/ffmpeg_demo/iOS-AVVideoPlayer/AVVideoThread.cpp"
-                  timestampString = "561376544.867732"
+                  timestampString = "561434857.953045"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "29"
@@ -41,7 +41,7 @@
                   moduleName = "ffmpeg_demo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yuxueqing/Desktop/iOS-FFMpeg-VideoPlayer/ffmpeg_demo/iOS-AVVideoPlayer/AVVideoThread.cpp"
-                  timestampString = "561376544.870811"
+                  timestampString = "561434857.957301"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "29"
@@ -56,7 +56,7 @@
                   moduleName = "ffmpeg_demo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yuxueqing/Desktop/iOS-FFMpeg-VideoPlayer/ffmpeg_demo/iOS-AVVideoPlayer/AVVideoThread.cpp"
-                  timestampString = "561376544.873371"
+                  timestampString = "561434857.961005"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "29"
@@ -79,54 +79,6 @@
             startingLineNumber = "105"
             endingLineNumber = "105"
             landmarkName = "AVDemux::IsAudio(AVPacket *packet)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ffmpeg_demo/iOS-AVVideoPlayer/AVDecode.cpp"
-            timestampString = "561376544.812019"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "AVDecode::Open(AVCodecParameters *para)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ffmpeg_demo/iOS-AVVideoPlayer/AVDecode.cpp"
-            timestampString = "561376544.81215"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "AVDecode::RecvFrame()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ffmpeg_demo/ViewController.mm"
-            timestampString = "561376544.812212"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -15,10 +15,10 @@ AVVideoFrameRender::AVVideoFrameRender(id<AVVideoRender> render)
     : m_render(render)
     , m_renderSize(CGSizeZero) {}
  
-void AVVideoFrameRender::InitFrame(const AVModeFrame& modeFrame)
+void AVVideoFrameRender::RenderFrame(const AVModeFrame* modeFrame)
 {
-    AVVideoFrame *videoFrame = [[AVVideoFrame alloc] initWidth:modeFrame.Width() Height:modeFrame.Height() timeStamp:modeFrame.TimeStamp()];
-    CGSize frameSize = CGSizeMake(modeFrame.Width(), modeFrame.Height());
+    AVVideoFrame *videoFrame = [[AVVideoFrame alloc] initWidth:modeFrame->Width() Height:modeFrame->Height() timeStamp:modeFrame->TimeStamp()];
+    CGSize frameSize = CGSizeMake(modeFrame->Width(), modeFrame->Height());
     if (!CGSizeEqualToSize(m_renderSize, frameSize)) {
         m_renderSize = frameSize;
         [m_render setFrameSize:m_renderSize];
@@ -28,11 +28,10 @@ void AVVideoFrameRender::InitFrame(const AVModeFrame& modeFrame)
     
 std::unique_ptr<AVVideoRenderImpl<AVModeFrame>> AVVideoFrameRender::Create(id<AVVideoRender> render)
 {
-    std::unique_ptr<AVVideoFrameRender> Render(new AVVideoFrameRender(render));
-    return Render;
+    return std::unique_ptr<AVVideoFrameRender>(new AVVideoFrameRender(render));
 }
     
-void AVVideoFrameRender::Destroy() {}
+void AVVideoFrameRender::DestroyRender() {}
     
 }
 

@@ -11,6 +11,7 @@
 #import "AVVideoPlayer.hpp"
 #import <objc/runtime.h>
 #import "AVDispatchQueue.h"
+#import "AVVideoRender.h"
 
 static inline void AVPostNotification(NSString *name, id object, id userInfo)
 {
@@ -41,9 +42,11 @@ static inline id AVCallBackDelegate(AVViewController *self, id delegate, SEL sel
 @interface AVViewController ()
 {
 @private
+    __strong id<AVVideoRender> m_renderProtocol;
     __weak id<AVViewControllerDelegate> m_delegate;
     std::shared_ptr<AVVideoPlayer::AVDemuxThread> m_demuxThread;
     std::shared_ptr<AVVideoPlayer::AVVideoPlayer> m_videoPlayer;
+    std::unique_ptr<AVVideoPlayer::AVVideoFrameRender> m_videoRender;
 }
 @end
 
