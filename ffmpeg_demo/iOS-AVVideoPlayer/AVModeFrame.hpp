@@ -33,11 +33,14 @@ public:
     int64_t TimeStamp() const;
     void SetTimeStamp(int64_t ts);
     
-    std::shared_ptr<AVFrame> frame() const;
+    std::shared_ptr<AVFrame> Frame() const;
     
-    static AVModeFrame* createMFrame(AVFrame *frame);
+    static AVModeFrame* CreateMFrame(AVFrame *frame);
+    
+    const uint8_t** BufferData() const;
     
 private:
+    uint8_t **data { nullptr };
     std::shared_ptr<AVFrame> m_avframe;
     double m_pts = 0.0;
     double m_duration = 0.0;

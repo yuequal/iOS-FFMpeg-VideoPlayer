@@ -25,9 +25,6 @@ namespace AVVideoPlayer{
 class AVDecode
 {
 public:
-    bool isAudio = false;
-    
-    long long pts = 0;
     
     virtual bool Open(AVCodecParameters *parameters);
     
@@ -44,6 +41,11 @@ public:
 public:
     AVDecode();
     virtual ~AVDecode();
+    
+public:
+    std::atomic<bool> m_isAudio; ;
+    
+    long long m_pts = 0;
     
 protected:
     AVCodecContext *m_codecContext { nullptr };

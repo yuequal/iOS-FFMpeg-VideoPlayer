@@ -10,15 +10,19 @@
 
 namespace AVVideoPlayer {
     
-AVModeFrame* AVModeFrame::createMFrame(AVFrame *frame)
+    AVModeFrame* AVModeFrame::CreateMFrame(AVFrame *frame)
 {
     AVModeFrame *mframe = new AVModeFrame();
     mframe->m_avframe = std::shared_ptr<AVFrame>(frame);
-    mframe->SetPts(frame->pts);
+    mframe->m_pts = frame->pts;
+    mframe->m_size = frame->pkt_size;
+    mframe->m_width = frame->width;
+    mframe->m_height = frame->height;
+    mframe->data = (uint8_t **)frame->data;
     return mframe;
 }
 
-std::shared_ptr<AVFrame> AVModeFrame::frame() const
+    std::shared_ptr<AVFrame> AVModeFrame::Frame() const
 {
     return m_avframe;
 }

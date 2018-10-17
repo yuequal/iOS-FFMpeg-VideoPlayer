@@ -53,7 +53,7 @@ private:
 @property(nonatomic, readonly) int64_t timeStamp;
 
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype) new NS_UNAVAILABLE;
+- (instancetype)new NS_UNAVAILABLE;
 
 - (instancetype)initWithModeFrame:(const AVVideoPlayer::AVModeFrame& )modeFrame;
 

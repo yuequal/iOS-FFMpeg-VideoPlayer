@@ -23,7 +23,7 @@ void AVDecode::Close()
         avcodec_close(m_codecContext);
         avcodec_free_context(&m_codecContext);
     }
-    pts = 0;
+    m_pts = 0;
     m_mutex.unlock();
 }
 
@@ -80,12 +80,6 @@ bool AVDecode::Send(AVPacket *packet)
     return true;
 }
 
-//void AVDecode::RecvFrame(AVModeFrame& modeFrame)
-//{
-//}
-//std::shared_ptr<AVModeFrame>& AVDecode::RecvFrame()
-//{
-//}
 AVModeFrame* AVDecode::RecvFrame()
 {
     std::lock_guard<std::mutex> lock(m_mutex);
@@ -98,8 +92,8 @@ AVModeFrame* AVDecode::RecvFrame()
         av_frame_free(&frame);
         return nullptr;
     }
-    AVModeFrame *mFrame = AVModeFrame::createMFrame(frame);
-    pts = frame->pts;
+    AVModeFrame *mFrame = AVModeFrame::CreateMFrame(frame);
+    m_pts = frame->pts;
     frame = nullptr;
     return mFrame;
 }

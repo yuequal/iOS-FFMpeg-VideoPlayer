@@ -31,6 +31,7 @@
 		C08EE6B92145155100B79D34 /* H264_artifacts_motion.h264 in Resources */ = {isa = PBXBuildFile; fileRef = C08EE6B82145155100B79D34 /* H264_artifacts_motion.h264 */; };
 		C08EE7E52145164C00B79D34 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C08EE7E42145164C00B79D34 /* video.mp4 */; };
 		C0B7702D21588080006F9688 /* AVDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B7702C21588080006F9688 /* AVDispatchQueue.m */; };
+		C0B84E1E21771B1300AA61BB /* AVVideoImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0B84E1D21771B1300AA61BB /* AVVideoImage.mm */; };
 		C0F22AC12142689C006AF382 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F22AC02142689C006AF382 /* AppDelegate.m */; };
 		C0F22AC42142689C006AF382 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0F22AC32142689C006AF382 /* ViewController.mm */; };
 		C0F22AC72142689C006AF382 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F22AC52142689C006AF382 /* Main.storyboard */; };
@@ -115,6 +116,8 @@
 		C08EE7E42145164C00B79D34 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		C0B7702B21588080006F9688 /* AVDispatchQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVDispatchQueue.h; sourceTree = "<group>"; };
 		C0B7702C21588080006F9688 /* AVDispatchQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVDispatchQueue.m; sourceTree = "<group>"; };
+		C0B84E1C21771B1300AA61BB /* AVVideoImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVVideoImage.h; sourceTree = "<group>"; };
+		C0B84E1D21771B1300AA61BB /* AVVideoImage.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AVVideoImage.mm; sourceTree = "<group>"; };
 		C0F22ABC2142689C006AF382 /* ffmpeg_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ffmpeg_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F22ABF2142689C006AF382 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F22AC02142689C006AF382 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -371,6 +374,8 @@
 				C054BFFF21607D89009107A9 /* AVVideoPlayerInternal.mm */,
 				C07AD9342175DCB50063B964 /* AVVideoRender.h */,
 				C07AD9352175DCB50063B964 /* AVVideoRender.mm */,
+				C0B84E1C21771B1300AA61BB /* AVVideoImage.h */,
+				C0B84E1D21771B1300AA61BB /* AVVideoImage.mm */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -773,6 +778,7 @@
 			files = (
 				C072410E2158A0DD0022A6A0 /* AVDecodeThread.cpp in Sources */,
 				C0F22AC42142689C006AF382 /* ViewController.mm in Sources */,
+				C0B84E1E21771B1300AA61BB /* AVVideoImage.mm in Sources */,
 				C072410F2158A0DD0022A6A0 /* AVVideoThread.cpp in Sources */,
 				C0F22ACF2142689E006AF382 /* main.m in Sources */,
 				C07241102158A0DD0022A6A0 /* AVDecode.cpp in Sources */,

@@ -42,7 +42,7 @@ bool AVVideoPlayer::Open(const char *url)
         m_decode->Send(pkt);
         AVModeFrame *frame =  m_decode->RecvFrame();
         if (m_videoPlay) {
-            m_videoPlay->Repaint(frame->frame());
+            m_videoPlay->Repaint(frame->Frame());
         }
     }
     
