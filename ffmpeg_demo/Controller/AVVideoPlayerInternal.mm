@@ -17,22 +17,41 @@ AVVideoPlayerInternal::AVVideoPlayerInternal(AVVideoPlayer *videoPlayer)
     m_videoPlayer = videoPlayer;
 }
 
-void AVVideoPlayerInternal::VideoPlayerPrepare()
+void AVVideoPlayerInternal::Prepare()
 {
     m_videoPlayer->Prepare();
 }
 
-void AVVideoPlayerInternal::VideoPlayerDestroyed()
+void AVVideoPlayerInternal::Destroyed()
 {
-    
+
 }
 
+void AVVideoPlayerInternal::Pause()
+{
+    m_videoPlayer->SetPause(true);
+}
+
+void AVVideoPlayerInternal::Stop()
+{
+    m_videoPlayer->Stop();
+}
+
+void AVVideoPlayerInternal::Resume()
+{
+    m_videoPlayer->Prepare();
+}
+
+void AVVideoPlayerInternal::Restart()
+{
+    m_videoPlayer->Restart();
+}
+    
 void AVVideoPlayerInternal::Seek(double pos)
 {
     m_videoPlayer->SeekToTime(pos);
 }
 
-    
 AVVideoPlayerSystemListener::AVVideoPlayerSystemListener(AVApplicationListener& listener)
     : m_listener(listener)
 {}
@@ -120,17 +139,23 @@ AVPlayerNotificationListener::~AVPlayerNotificationListener()
     
 void AVPlayerNotificationListener::ApplicationWillResign()
 {
-    
+    auto videoPlayer = m_videoPrivate.lock();
+    if (videoPlayer)
+        videoPlayer->Stop();
 }
     
 void AVPlayerNotificationListener::ApplicationDidBecomeActive()
 {
-    
+    auto videoPlayer = m_videoPrivate.lock();
+    if (videoPlayer)
+        videoPlayer->Resume();
 }
     
 void AVPlayerNotificationListener::ApplicationWillEnterBackground()
 {
-    
+    auto videoPlayer = m_videoPrivate.lock();
+    if (videoPlayer)
+        videoPlayer->Pause();
 }
     
 }

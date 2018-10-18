@@ -22,43 +22,39 @@
     UIImage *m_videoImage;
     CGSize m_videoSize;
 }
-
 @end
 
 @implementation AVVideoFrameRenderProvider
-
-- (void)setFrameSize:(CGSize)size
-{
-    
-}
-
-- (void)renderFrame:(AVVideoFrame *)videoFrame
-{
-    m_videoImage = [[UIImage alloc] init];
-    [AVDispatchQueue dispatchTaskAsyncOnMainQueue:^{
-
-    }];
-    NSLog(@"renderFrame------: %d",videoFrame.width);
-}
 
 @end
 
 @interface ViewController ()
 {
-    std::shared_ptr<AVVideoPlayer::AVDemux> m_demux;
-    std::shared_ptr<AVVideoPlayer::AVDemuxThread> m_demuxThread;
-    std::shared_ptr<AVVideoPlayer::AVDecode> m_decode;
-    std::shared_ptr<AVVideoPlayer::AVVideoFrameRender> m_videoRender;
-    std::shared_ptr<AVVideoPlayer::AVVideoFrameImage> m_frameImage;
     std::thread m_decodeThread;
     std::thread m_readFrameThread;
     struct SwsContext *m_swsContextt;
     __strong id<AVVideoRender> m_renderProtcol;
     __strong UIImageView *m_imageView;
+    std::shared_ptr<AVVideoPlayer::AVDemux> m_demux;
+    std::shared_ptr<AVVideoPlayer::AVDemuxThread> m_demuxThread;
+    std::shared_ptr<AVVideoPlayer::AVDecode> m_decode;
+    std::shared_ptr<AVVideoPlayer::AVVideoFrameRender> m_videoRender;
+    std::shared_ptr<AVVideoPlayer::AVVideoFrameImage> m_frameImage;
 }
 @end
 
 @implementation ViewController
+
+- (void)dealloc
+{
+    m_demux.reset();
+    m_demuxThread.reset();
+    m_decode.reset();
+    m_videoRender.reset();
+    m_frameImage.reset();
+    sws_freeContext(m_swsContextt);
+    m_swsContextt = NULL;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -84,6 +80,8 @@
     m_frameImage = std::make_shared<AVVideoPlayer::AVVideoFrameImage>(m_swsContextt,m_decode->codecContext());
     m_decodeThread = std::thread([self](){
         while (true) {
+            @autoreleasepool {
+                
             AVPacket *packet = m_demux->Read();
             if (!packet) continue;
             std::cout<< packet->size << packet->pts << std::endl;
@@ -106,6 +104,7 @@
                 }];
             }
             std::cout << frame->linesize[0] << "--- size :" << frame->pkt_size << " pts :"<< frame->pts << "  dts:" << frame->pkt_dts << std::endl;
+        }
         }
     });
 

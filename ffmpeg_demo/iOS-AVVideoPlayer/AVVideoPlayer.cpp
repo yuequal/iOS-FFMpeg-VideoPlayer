@@ -71,4 +71,9 @@ void AVVideoPlayer::Restart()
     
 }
     
+void AVVideoPlayer::Stop()
+{
+    
+}
+    
 }

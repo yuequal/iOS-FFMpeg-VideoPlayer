@@ -30,6 +30,7 @@ bool AVVideoFrameImage::Open(const AVModeFrame* modeFrame ,unsigned char *buffer
     data[0] = (uint8_t*)buffer;
     int linesize[AV_NUM_DATA_POINTERS] = {0};
     linesize[0] = width * 4;
+    
     std::shared_ptr<AVFrame> frame = modeFrame->Frame();
     sws_scale(m_swsContext, (const uint8_t* const*)frame->data, frame->linesize, 0, m_codecContext->height,data,linesize);
     return true;

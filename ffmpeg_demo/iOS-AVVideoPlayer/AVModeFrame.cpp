@@ -22,7 +22,7 @@ namespace AVVideoPlayer {
     return mframe;
 }
 
-    std::shared_ptr<AVFrame> AVModeFrame::Frame() const
+std::shared_ptr<AVFrame> AVModeFrame::Frame() const
 {
     return m_avframe;
 }

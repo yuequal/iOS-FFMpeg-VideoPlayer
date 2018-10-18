@@ -26,7 +26,7 @@ void AVVideoFrameRender::RenderFrame(const AVModeFrame* modeFrame)
     [m_render renderFrame:videoFrame];
 }
     
-std::unique_ptr<AVVideoRenderImpl<AVModeFrame>> AVVideoFrameRender::Create(id<AVVideoRender> render)
+std::unique_ptr<AVVideoRenderImpl<AVModeFrame>> AVVideoFrameRender::Create(id<AVVideoRender> render,const AVVideoFrameImage *image)
 {
     return std::unique_ptr<AVVideoFrameRender>(new AVVideoFrameRender(render));
 }

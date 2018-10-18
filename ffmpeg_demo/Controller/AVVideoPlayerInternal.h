@@ -11,21 +11,8 @@
 
 namespace AVVideoPlayer {
     
-class AVVideoPlayerInternal {
+class AVVideoPlayerInternal;
     
-public:
-    AVVideoPlayerInternal(AVVideoPlayer* videoPlayer);
-    
-    virtual void VideoPlayerDestroyed();
-    
-    virtual void VideoPlayerPrepare();
-    
-    virtual void Seek(double pos);
-private:
-    AVVideoPlayer *m_videoPlayer;
-
-};
-
 class AVVideoPlayerSystemListener {
     
 public:
@@ -64,7 +51,7 @@ private:
     id m_willEnterBackgroundObserver;
     id m_didBecomeActiveObserver;
 };
-    
+
 class AVPlayerNotificationListener : public AVVideoPlayerListener::AVApplicationListener
 {
     
@@ -75,5 +62,31 @@ public:
     virtual void ApplicationWillResign();
     virtual void ApplicationWillEnterBackground();
     virtual void ApplicationDidBecomeActive();
+    
+private:
+    std::weak_ptr<AVVideoPlayerInternal> m_videoPrivate;
+};
+
+class AVVideoPlayerInternal {
+    
+public:
+    AVVideoPlayerInternal(AVVideoPlayer* videoPlayer);
+    
+    virtual void Destroyed();
+    
+    virtual void Pause();
+    
+    virtual void Stop();
+    
+    virtual void Resume();
+    
+    virtual void Restart();
+    
+    virtual void Prepare();
+    
+    virtual void Seek(double pos);
+private:
+    AVVideoPlayer *m_videoPlayer;
+    
 };
 }

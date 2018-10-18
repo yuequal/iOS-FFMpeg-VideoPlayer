@@ -31,6 +31,7 @@ public:
     void Prepare();
     void Loading();
     void Restart();
+    void Stop();
     double Duration() const;
     
 private:
