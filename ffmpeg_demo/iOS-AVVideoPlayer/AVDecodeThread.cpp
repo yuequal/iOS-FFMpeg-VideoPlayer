@@ -12,19 +12,19 @@ namespace AVVideoPlayer {
     
 AVDecodeThread::AVDecodeThread(const AVDecodePtr& decodePtr, const int& maxSize)
 {
-    this->m_decode = decodePtr;
-    this->maxLimit = maxSize;
+    m_decode = decodePtr;
+    maxLimit = maxSize;
 }
 
 AVDecodeThread::~AVDecodeThread()
 {
-    this->m_isExit = false;
+    m_isExit = false;
 }
     
 void AVDecodeThread::Close()
 {
     Clear();
-    if (m_isExit.load()) {
+    if (m_isExit) {
         m_isExit = true;
     }
     m_decode->Close();

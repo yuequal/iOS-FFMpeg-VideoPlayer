@@ -11,8 +11,8 @@
 namespace AVVideoPlayer {
     
 AVVideoFrameImage::AVVideoFrameImage(SwsContext *sctx, const AVCodecContext* ctx)
-: m_swsContext(sctx)
-, m_codecContext(ctx) {}
+    : m_swsContext(sctx)
+    , m_codecContext(ctx) {}
     
 bool AVVideoFrameImage::Open(const AVModeFrame* modeFrame ,unsigned char *buffer, int width, int height)
 {

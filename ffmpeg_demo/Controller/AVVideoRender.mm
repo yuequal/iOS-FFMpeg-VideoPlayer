@@ -37,12 +37,12 @@ void AVVideoFrameRender::DestroyRender() {}
 
 @implementation AVVideoFrame
 
-- (instancetype)initWidth:(int)scaledWidth Height:(int)scaledHeight timeStamp:(int64_t)timeStamp
+- (instancetype)initWidth:(int)width Height:(int)height timeStamp:(int64_t)timeStamp
 {
     self = [super init];
     if (self) {
-        _width = scaledWidth;
-        _height = scaledWidth;
+        _width = width;
+        _height = height;
         _timeStamp = timeStamp;
     }
     return self;

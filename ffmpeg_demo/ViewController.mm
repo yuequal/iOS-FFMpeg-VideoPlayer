@@ -26,6 +26,15 @@
 
 @implementation AVVideoFrameRenderProvider
 
+- (void)setFrameSize:(CGSize)size
+{
+    if (!CGSizeEqualToSize(size, m_videoSize)) {
+        m_videoSize = size;
+    }
+}
+- (void)renderFrame:(AVVideoFrame *)videoFrame{
+}
+
 @end
 
 @interface ViewController ()

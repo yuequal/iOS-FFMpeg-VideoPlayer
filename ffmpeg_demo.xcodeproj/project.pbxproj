@@ -32,6 +32,8 @@
 		C08EE7E52145164C00B79D34 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C08EE7E42145164C00B79D34 /* video.mp4 */; };
 		C0B7702D21588080006F9688 /* AVDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C0B7702C21588080006F9688 /* AVDispatchQueue.m */; };
 		C0B84E1E21771B1300AA61BB /* AVVideoImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0B84E1D21771B1300AA61BB /* AVVideoImage.mm */; };
+		C0B84E2321786E5A00AA61BB /* AVAudioRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0B84E2221786E5A00AA61BB /* AVAudioRender.mm */; };
+		C0B84E262178804300AA61BB /* QQ20181018-164122-HD.gif in Resources */ = {isa = PBXBuildFile; fileRef = C0B84E252178804300AA61BB /* QQ20181018-164122-HD.gif */; };
 		C0F22AC12142689C006AF382 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F22AC02142689C006AF382 /* AppDelegate.m */; };
 		C0F22AC42142689C006AF382 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0F22AC32142689C006AF382 /* ViewController.mm */; };
 		C0F22AC72142689C006AF382 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F22AC52142689C006AF382 /* Main.storyboard */; };
@@ -118,6 +120,9 @@
 		C0B7702C21588080006F9688 /* AVDispatchQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVDispatchQueue.m; sourceTree = "<group>"; };
 		C0B84E1C21771B1300AA61BB /* AVVideoImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVVideoImage.h; sourceTree = "<group>"; };
 		C0B84E1D21771B1300AA61BB /* AVVideoImage.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AVVideoImage.mm; sourceTree = "<group>"; };
+		C0B84E2121786E5A00AA61BB /* AVAudioRender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVAudioRender.h; sourceTree = "<group>"; };
+		C0B84E2221786E5A00AA61BB /* AVAudioRender.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AVAudioRender.mm; sourceTree = "<group>"; };
+		C0B84E252178804300AA61BB /* QQ20181018-164122-HD.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "QQ20181018-164122-HD.gif"; sourceTree = "<group>"; };
 		C0F22ABC2142689C006AF382 /* ffmpeg_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ffmpeg_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F22ABF2142689C006AF382 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F22AC02142689C006AF382 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -355,6 +360,7 @@
 		C08A9C1B2150E58700003ED8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C0B84E252178804300AA61BB /* QQ20181018-164122-HD.gif */,
 				C08EE6B82145155100B79D34 /* H264_artifacts_motion.h264 */,
 				C08EE7E42145164C00B79D34 /* video.mp4 */,
 			);
@@ -376,6 +382,8 @@
 				C07AD9352175DCB50063B964 /* AVVideoRender.mm */,
 				C0B84E1C21771B1300AA61BB /* AVVideoImage.h */,
 				C0B84E1D21771B1300AA61BB /* AVVideoImage.mm */,
+				C0B84E2121786E5A00AA61BB /* AVAudioRender.h */,
+				C0B84E2221786E5A00AA61BB /* AVAudioRender.mm */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -748,6 +756,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0F22ACC2142689E006AF382 /* LaunchScreen.storyboard in Resources */,
+				C0B84E262178804300AA61BB /* QQ20181018-164122-HD.gif in Resources */,
 				C08EE7E52145164C00B79D34 /* video.mp4 in Resources */,
 				C08EE6B92145155100B79D34 /* H264_artifacts_motion.h264 in Resources */,
 				C0F22AC92142689E006AF382 /* Assets.xcassets in Resources */,
@@ -791,6 +800,7 @@
 				C072410C2158A0DD0022A6A0 /* AVDemux.cpp in Sources */,
 				C054C00021607D89009107A9 /* AVVideoPlayerInternal.mm in Sources */,
 				C072410B2158A0DD0022A6A0 /* AVAudioThread.cpp in Sources */,
+				C0B84E2321786E5A00AA61BB /* AVAudioRender.mm in Sources */,
 				C07AD9362175DCB50063B964 /* AVVideoRender.mm in Sources */,
 				C07241112158A0DD0022A6A0 /* AVDemuxThread.cpp in Sources */,
 				C072410D2158A0DD0022A6A0 /* AVVideoPlayer.cpp in Sources */,

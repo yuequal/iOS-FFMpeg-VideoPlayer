@@ -70,7 +70,10 @@ private:
 
 - (instancetype)initWithModeFrame:(const AVVideoPlayer::AVModeFrame& )modeFrame;
 
-- (instancetype)initWidth:(int)scaledWidth Height:(int)scaledHeight timeStamp:(int64_t)timeStamp;
+- (instancetype)initWidth:(int)width Height:(int)height timeStamp:(int64_t)timeStamp;
+
+- (instancetype)initWithWidth:(int)width height:(int)height dataY:(const uint8_t *)dataY dataU:(const uint8_t *)dataU dataV:(const uint8_t *)dataV;
+
 @end
 
 @protocol AVVideoRender <NSObject>

@@ -85,6 +85,7 @@ public:
     virtual void Prepare();
     
     virtual void Seek(double pos);
+    
 private:
     AVVideoPlayer *m_videoPlayer;
     
