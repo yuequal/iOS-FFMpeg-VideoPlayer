@@ -10,7 +10,7 @@
 
 namespace AVVideoPlayer {
     
-AVVideoFrameImage::AVVideoFrameImage(SwsContext *sctx, const AVCodecContext* ctx)
+AVVideoFrameImage::AVVideoFrameImage(struct SwsContext *sctx, const AVCodecContext* ctx)
     : m_swsContext(sctx)
     , m_codecContext(ctx) {}
     

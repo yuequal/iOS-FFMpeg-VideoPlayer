@@ -10,22 +10,27 @@
 
 namespace AVVideoPlayer {
     
-AVVideoThread::AVVideoThread(
-AVCodecParameters *params,
-AVVideoPLay *call,
-const AVDecodePtr& ptr,
-const int& maxSize) :
-AVDecodeThread(ptr,maxSize)
-{
-    m_params = params;
-    m_videoPlay = call;
-    m_synpts = 0;
-    m_isPause = false;
-}
+AVVideoThread::AVVideoThread( AVCodecParameters *params,AVVideoPLay *call,const AVDecodePtr& ptr,const int& maxSize)
+    : AVDecodeThread(ptr,maxSize)
+    , m_params(params)
+    , m_videoPlay(call)
+    , m_synpts(0)
+    , m_isPause(false) { }
     
 AVVideoThread::~AVVideoThread()
 {
     
+}
+    
+void AVVideoThread::Clear()
+{
+    AVDecodeThread::Clear();
+    
+}
+    
+void AVVideoThread::Close()
+{
+    AVDecodeThread::Close();
 }
     
 bool AVVideoThread::Open(int width, int height)

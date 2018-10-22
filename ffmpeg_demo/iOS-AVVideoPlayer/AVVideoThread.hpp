@@ -22,6 +22,9 @@ public:
 public:
     virtual bool Open(int width, int height);
     
+    virtual void Clear();
+    virtual void Close();
+    
     void Start();
     void StartVideoThread();
     void SetPause(bool isPause);

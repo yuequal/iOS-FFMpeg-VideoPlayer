@@ -18,32 +18,35 @@ extern "C"{
 
 namespace AVVideoPlayer {
     
-    template <typename T>
-    class AVFrameImageInterface
-    {
-    public:
-        virtual ~AVFrameImageInterface() = default;
-        virtual void Create(const T& t) = 0;
-    };
+template <typename T>
+class AVFrameImageInterface
+{
+public:
+    virtual ~AVFrameImageInterface() = default;
+    virtual void Create(const T& t) = 0;
+};
+
+class AVVideoFrameImage : public AVFrameImageInterface <AVVideoImage>
+{
+public:
+    AVVideoFrameImage(struct SwsContext *sctx,const AVCodecContext *ctx);
     
-    class AVVideoFrameImage : public AVFrameImageInterface <AVVideoImage>
-    {
-    public:
-        AVVideoFrameImage(SwsContext *sctx,const AVCodecContext *ctx);
-        
-        virtual bool Open(const AVModeFrame* frame ,unsigned char* buffer,int width, int height);
-        
-        virtual void Create(const AVVideoImage& image);
-        
-        virtual UIImage *FrameImage(const unsigned char* data,int width, int height);
-     
-    private:
-        std::mutex m_mutex;
-        
-        SwsContext *m_swsContext;
-        
-        const AVCodecContext *m_codecContext;
-    };
+    virtual ~AVVideoFrameImage() { }
+    
+    virtual bool Open(const AVModeFrame* frame ,unsigned char* buffer,int width, int height);
+    
+    virtual void Create(const AVVideoImage& image);
+    
+    virtual UIImage *FrameImage(const unsigned char* data,int width, int height);
+ 
+private:
+    std::mutex m_mutex;
+    
+    struct SwsContext *m_swsContext;
+    
+    const AVCodecContext *m_codecContext;
+
+};
 }
 
 @interface AVVideoImage : NSObject
