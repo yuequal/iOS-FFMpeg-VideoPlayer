@@ -104,7 +104,7 @@
             if (m_videoRender) {
                 m_videoRender->RenderFrame(static_cast<const AVVideoPlayer::AVModeFrame *>(modeFrame));
             }
-            unsigned char *buffer = (unsigned char *)malloc(320 * 250 * 4 + 1);
+            unsigned char *buffer = (unsigned char *)malloc(320 * 250 * 4);
             success = m_frameImage->Open(static_cast<const AVVideoPlayer::AVModeFrame *>(modeFrame), buffer, 320, 250);
             UIImage *videoImage = m_frameImage->FrameImage(static_cast<const unsigned char*>(buffer), 320, 250);
             if (videoImage) {

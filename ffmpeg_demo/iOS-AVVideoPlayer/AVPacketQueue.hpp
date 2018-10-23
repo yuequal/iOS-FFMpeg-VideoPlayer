@@ -50,6 +50,7 @@ AVPacketQueue<T>::AVPacketQueue(unsigned int maxSize)
 template <typename T>
 void AVPacketQueue<T>::ResetSize(unsigned int size)
 {
+    std::unique_lock<std::mutex> lock(m_mutex);
     this->m_bufferSize = size;
 }
 
