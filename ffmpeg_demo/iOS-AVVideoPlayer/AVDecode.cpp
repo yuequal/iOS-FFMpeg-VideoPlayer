@@ -79,6 +79,11 @@ bool AVDecode::Send(AVPacket *packet)
     if (ret != 0) return false;
     return true;
 }
+    
+int32_t AVDecode::AVRecvFrame(AVCodecContext *contex, AVModeFrame *frame, int flags)
+{
+    return 0;
+}
 
 AVModeFrame* AVDecode::RecvFrame()
 {

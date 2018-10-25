@@ -98,6 +98,12 @@ void AVDispatchQueue::DispatchTask(dispatch_queue_t queue, dispatch_block_t bloc
     else
         dispatch_sync(queue, block);
 }
+    
+void AVDispatchQueue::DispatchTaskOnMainQueue(dispatch_block_t block, bool synchronous)
+{
+    AVDispatchQueue *mainQueue = AVMainQueue();
+    mainQueue->DispatchTask(AVDispatchQueueType::AVDispatchMainQueue, block, synchronous);
+}
 
 dispatch_queue_t AVDispatchQueue::Queue() const
 {
@@ -159,12 +165,6 @@ AVDispatchQueue::~AVDispatchQueue()
     AVVideoPlayer::AVDispatchQueue *m_dispatchQueue;
 }
 
-- (void)dealloc
-{
-    NSLog(@"%s",__func__);
-    [self invalidate];
-}
-
 - (instancetype)initWithCompletion:(dispatch_block_t)completion
 {
     if (self = [super init]) {
@@ -183,6 +183,11 @@ AVDispatchQueue::~AVDispatchQueue()
         }, false);
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [self invalidate];
 }
 
 - (BOOL)isPause

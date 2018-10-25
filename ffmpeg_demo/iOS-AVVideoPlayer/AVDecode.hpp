@@ -17,6 +17,15 @@ extern "C"{
 #include <libavformat/avformat.h>
 }
 
+struct AVCodecContextFree {
+  void operator()(AVCodecContext* ctx) const { avcodec_free_context(&ctx); }
+};
+struct AVFrameFree {
+    void operator()(AVFrame *frame) const { av_frame_free(&frame); }
+};
+struct AVModeFrameFree {
+    void operator()(AVModeFrame *modeFrame) const { av_free_mode_frame(modeFrame);  }
+};
 
 extern void AVFreePacket(AVPacket **packet);
 
@@ -29,6 +38,8 @@ public:
     virtual bool Open(AVCodecParameters *parameters);
     
     virtual bool Send(AVPacket *packet);
+    
+    virtual int32_t AVRecvFrame(AVCodecContext *context, AVModeFrame *av_frame, int flags);
     
     virtual AVModeFrame* RecvFrame();
     
@@ -46,6 +57,9 @@ public:
     std::atomic<bool> m_isAudio; ;
     
     long long m_pts = 0;
+    
+private:
+    static void AVFreeBuffer(void *context, uint8_t *data);
     
 protected:
     AVCodecContext *m_codecContext { nullptr };

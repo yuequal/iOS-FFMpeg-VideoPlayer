@@ -35,6 +35,10 @@
 		C0B84E1E21771B1300AA61BB /* AVVideoImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0B84E1D21771B1300AA61BB /* AVVideoImage.mm */; };
 		C0B84E2321786E5A00AA61BB /* AVAudioRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0B84E2221786E5A00AA61BB /* AVAudioRender.mm */; };
 		C0B84E262178804300AA61BB /* QQ20181018-164122-HD.gif in Resources */ = {isa = PBXBuildFile; fileRef = C0B84E252178804300AA61BB /* QQ20181018-164122-HD.gif */; };
+		C0BC38602181AC4C0031C395 /* AVDecodeImageCallBack.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0BC385E2181AC4C0031C395 /* AVDecodeImageCallBack.mm */; };
+		C0BC38632181B1500031C395 /* AVOptional.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0BC38612181B1500031C395 /* AVOptional.cpp */; };
+		C0BC38662181B98A0031C395 /* AVVideoCodec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0BC38642181B98A0031C395 /* AVVideoCodec.cpp */; };
+		C0BC38692181C17B0031C395 /* AVVideoDecoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0BC38682181C17B0031C395 /* AVVideoDecoder.mm */; };
 		C0F22AC12142689C006AF382 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F22AC02142689C006AF382 /* AppDelegate.m */; };
 		C0F22AC42142689C006AF382 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C0F22AC32142689C006AF382 /* ViewController.mm */; };
 		C0F22AC72142689C006AF382 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F22AC52142689C006AF382 /* Main.storyboard */; };
@@ -126,6 +130,14 @@
 		C0B84E2121786E5A00AA61BB /* AVAudioRender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVAudioRender.h; sourceTree = "<group>"; };
 		C0B84E2221786E5A00AA61BB /* AVAudioRender.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AVAudioRender.mm; sourceTree = "<group>"; };
 		C0B84E252178804300AA61BB /* QQ20181018-164122-HD.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "QQ20181018-164122-HD.gif"; sourceTree = "<group>"; };
+		C0BC385E2181AC4C0031C395 /* AVDecodeImageCallBack.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AVDecodeImageCallBack.mm; sourceTree = "<group>"; };
+		C0BC385F2181AC4C0031C395 /* AVDecodeImageCallBack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVDecodeImageCallBack.h; sourceTree = "<group>"; };
+		C0BC38612181B1500031C395 /* AVOptional.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AVOptional.cpp; sourceTree = "<group>"; };
+		C0BC38622181B1500031C395 /* AVOptional.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVOptional.hpp; sourceTree = "<group>"; };
+		C0BC38642181B98A0031C395 /* AVVideoCodec.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AVVideoCodec.cpp; sourceTree = "<group>"; };
+		C0BC38652181B98A0031C395 /* AVVideoCodec.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AVVideoCodec.hpp; sourceTree = "<group>"; };
+		C0BC38672181C17B0031C395 /* AVVideoDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVVideoDecoder.h; sourceTree = "<group>"; };
+		C0BC38682181C17B0031C395 /* AVVideoDecoder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AVVideoDecoder.mm; sourceTree = "<group>"; };
 		C0F22ABC2142689C006AF382 /* ffmpeg_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ffmpeg_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F22ABF2142689C006AF382 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F22AC02142689C006AF382 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -342,6 +354,10 @@
 				C072410A2158A0DD0022A6A0 /* AVDemux.hpp */,
 				C072412321592A960022A6A0 /* AVPacketQueue.cpp */,
 				C072412421592A960022A6A0 /* AVPacketQueue.hpp */,
+				C0BC38612181B1500031C395 /* AVOptional.cpp */,
+				C0BC38622181B1500031C395 /* AVOptional.hpp */,
+				C0BC38642181B98A0031C395 /* AVVideoCodec.cpp */,
+				C0BC38652181B98A0031C395 /* AVVideoCodec.hpp */,
 			);
 			path = "iOS-AVVideoPlayer";
 			sourceTree = "<group>";
@@ -389,6 +405,10 @@
 				C0B84E2221786E5A00AA61BB /* AVAudioRender.mm */,
 				C0AB6376217EC55E001D89BD /* AVVideoRenderContext.h */,
 				C0AB6377217EC55E001D89BD /* AVVideoRenderContext.mm */,
+				C0BC385E2181AC4C0031C395 /* AVDecodeImageCallBack.mm */,
+				C0BC385F2181AC4C0031C395 /* AVDecodeImageCallBack.h */,
+				C0BC38672181C17B0031C395 /* AVVideoDecoder.h */,
+				C0BC38682181C17B0031C395 /* AVVideoDecoder.mm */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -793,7 +813,9 @@
 				C072410E2158A0DD0022A6A0 /* AVDecodeThread.cpp in Sources */,
 				C0F22AC42142689C006AF382 /* ViewController.mm in Sources */,
 				C0AB6378217EC55E001D89BD /* AVVideoRenderContext.mm in Sources */,
+				C0BC38632181B1500031C395 /* AVOptional.cpp in Sources */,
 				C0B84E1E21771B1300AA61BB /* AVVideoImage.mm in Sources */,
+				C0BC38662181B98A0031C395 /* AVVideoCodec.cpp in Sources */,
 				C072410F2158A0DD0022A6A0 /* AVVideoThread.cpp in Sources */,
 				C0F22ACF2142689E006AF382 /* main.m in Sources */,
 				C07241102158A0DD0022A6A0 /* AVDecode.cpp in Sources */,
@@ -801,8 +823,10 @@
 				C072412521592A960022A6A0 /* AVPacketQueue.cpp in Sources */,
 				C0B7702D21588080006F9688 /* AVDispatchQueue.m in Sources */,
 				C08EE6B52144C87000B79D34 /* AVViewController.mm in Sources */,
+				C0BC38692181C17B0031C395 /* AVVideoDecoder.mm in Sources */,
 				C0100B7E214B9B7D006563FD /* AVVideoPlayerController.m in Sources */,
 				C0F22AC12142689C006AF382 /* AppDelegate.m in Sources */,
+				C0BC38602181AC4C0031C395 /* AVDecodeImageCallBack.mm in Sources */,
 				C072410C2158A0DD0022A6A0 /* AVDemux.cpp in Sources */,
 				C054C00021607D89009107A9 /* AVVideoPlayerInternal.mm in Sources */,
 				C072410B2158A0DD0022A6A0 /* AVAudioThread.cpp in Sources */,

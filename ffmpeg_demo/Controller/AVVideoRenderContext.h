@@ -49,6 +49,9 @@ public:
     void DispatchTask(AVDispatchQueueType type,dispatch_block_t block, bool sync);
     void DispatchTask(dispatch_queue_t queue, dispatch_block_t block, bool sync);
     
+public:
+    static void DispatchTaskOnMainQueue(dispatch_block_t block, bool synchronous);
+    
 private:
     AVDispatchQueue* _AVQueueFromType(AVDispatchQueueType type);
     dispatch_queue_t _AVDispatchQueueFromType(AVDispatchQueueType type);
