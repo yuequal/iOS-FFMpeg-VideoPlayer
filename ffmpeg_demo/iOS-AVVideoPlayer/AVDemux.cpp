@@ -75,6 +75,22 @@ bool AVDemux::Open(const char *url)
     return true;
 }
     
+void AVDemux::ReadPacket(AVPacket* packet)
+{
+    std::lock_guard<std::mutex> lock(m_mutex);
+    if (!m_formatContex) return;
+    int ret = av_read_frame(m_formatContex, packet);
+    if (ret != 0)
+    {
+        av_packet_free(&packet);
+        return;
+    }
+    packet->pts = packet->pts * (1000 * (r2d(m_formatContex->streams[packet->stream_index]->time_base)));
+    packet->dts = packet->dts * (1000 * (r2d(m_formatContex->streams[packet->stream_index]->time_base)));
+    //    std::cout << packet->pts << "  " <<std::endl;
+    return ;
+}
+    
 AVPacket* AVDemux::Read()
 {
     m_mutex.lock();

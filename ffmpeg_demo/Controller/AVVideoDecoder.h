@@ -37,12 +37,17 @@ public:
     
     const char* DecodeName() const override;
     
+    static const char* kDecodeImplName;
+    
 private:
-    static int AVGetBuffer(AVCodecContext* context, AVModeFrame *frame, int flags);
+    
+    std::mutex m_mutex;
+    
+    static int AVGetBuffer(AVCodecContext* context, AVFrame *frame, int flags);
     
     std::unique_ptr<AVCodecContext, AVCodecContextFree> m_codecContext;
     
-    std::unique_ptr<AVModeFrame, AVModeFrameFree> m_modeFrame;
+ //   std::unique_ptr<AVModeFrame, AVModeFrameFree> m_modeFrame;
     
     AVDecodeImageCallBack *m_decodeCallBack;
 };

@@ -7,3 +7,22 @@
 //
 
 #include "AVDecodeImageCallBack.h"
+
+namespace AVVideoPlayer {
+    
+bool VideoDecode::PrefersLateDecoding() const
+{
+    return false;
+}
+
+const char* VideoDecode::DecodeName() const
+{
+    return "AVVideoDecoder";
+}
+
+int32_t VideoDecode::Release()
+{
+    return -1;
+}
+    
+}

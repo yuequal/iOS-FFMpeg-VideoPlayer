@@ -36,7 +36,7 @@ bool AVVideoFrameImage::Open(const AVModeFrame* modeFrame ,unsigned char *buffer
     return true;
 }
 
-UIImage * AVVideoFrameImage::FrameImage(const unsigned char* data,int width,int height)
+AVVideoImage * AVVideoFrameImage::FrameImage(const unsigned char* data,int width,int height)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
     int linesize[AV_NUM_DATA_POINTERS] = {0};
@@ -48,10 +48,11 @@ UIImage * AVVideoFrameImage::FrameImage(const unsigned char* data,int width,int 
     CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, colorData, sizeof(colorData), NULL);
     CGImageRef cgImage = CGImageCreate(width,height,8,24,linesize[0],colorSpace,bitmapInfo,provider,NULL,NO,kCGRenderingIntentDefault);
     UIImage * image = [UIImage imageWithCGImage:cgImage];
+    AVVideoImage *videoImage = [AVVideoImage videoImageWith:image width:width height:height];
     CGImageRelease(cgImage);
     CGColorSpaceRelease(colorSpace);
     CGDataProviderRelease(provider);
-    return image;
+    return videoImage;
 }
     
 void AVVideoFrameImage::Create(const AVVideoImage& image)
@@ -61,5 +62,22 @@ void AVVideoFrameImage::Create(const AVVideoImage& image)
 
 
 @implementation AVVideoImage
+
++ (instancetype)videoImageWith:(UIImage *)image width:(int)width height:(int)height
+{
+    AVVideoImage *videoImage = [[AVVideoImage alloc] initWithImage:image width:width height:height];
+    return videoImage;
+}
+
+- (instancetype)initWithImage:(UIImage *)image width:(int)width height:(int)height
+{
+    self = [super init];
+    if (self) {
+        _image = image;
+        _width = width;
+        _height = height;
+    }
+    return self;
+}
 
 @end

@@ -39,6 +39,7 @@
 
 @interface ViewController ()
 {
+    unsigned char *m_buffer;
     std::thread m_decodeThread;
     std::thread m_readFrameThread;
     struct SwsContext *m_swsContextt;
@@ -62,7 +63,9 @@
     m_videoRender.reset();
     m_frameImage.reset();
     sws_freeContext(m_swsContextt);
-    m_swsContextt = NULL;
+    free(m_buffer);
+    m_buffer = nullptr;
+    m_swsContextt = nullptr;
 }
 
 - (void)viewDidLoad {
@@ -74,14 +77,14 @@
     m_demux = std::make_shared<AVVideoPlayer::AVDemux>(ctx);
     m_videoRender = std::make_shared<AVVideoPlayer::AVVideoFrameRender>(m_renderProtcol);
     bool success = m_demux->Open(file);
+    AVPacket *av_packet = av_packet_alloc();
     if (success) {
-        AVPacket* packet = m_demux->Read();
-        std::cout << "-- size: "<<packet->size << " -- pts: "<< packet->pts << std::endl;
+        m_demux->ReadPacket(av_packet);
+        std::cout << "-- size: "<<av_packet->size << " -- pts: "<< av_packet->pts << std::endl;
       //  av_packet_free(&packet);
     }
 
     m_demux->Start();
-    AVVideoPlayer::AVDecode decode;
     m_decode = std::shared_ptr<AVVideoPlayer::AVDecode>(new AVVideoPlayer::AVDecode());
     AVCodecParameters *paras = m_demux->CopyVideoParams();
     success = m_decode->Open(paras);
@@ -106,10 +109,10 @@
             }
             unsigned char *buffer = (unsigned char *)malloc(320 * 250 * 4);
             success = m_frameImage->Open(static_cast<const AVVideoPlayer::AVModeFrame *>(modeFrame), buffer, 320, 250);
-            UIImage *videoImage = m_frameImage->FrameImage(static_cast<const unsigned char*>(buffer), 320, 250);
+            AVVideoImage *videoImage = m_frameImage->FrameImage(static_cast<const unsigned char*>(buffer), 320, 250);
             if (videoImage) {
                 [AVDispatchQueue dispatchTaskAsyncOnMainQueue:^{
-                    self->m_imageView.image = videoImage;
+                    self->m_imageView.image = videoImage.image;
                 }];
             }
             std::cout << frame->linesize[0] << "--- size :" << frame->pkt_size << " pts :"<< frame->pts << "  dts:" << frame->pkt_dts << std::endl;

@@ -104,6 +104,12 @@ void AVDispatchQueue::DispatchTaskOnMainQueue(dispatch_block_t block, bool synch
     AVDispatchQueue *mainQueue = AVMainQueue();
     mainQueue->DispatchTask(AVDispatchQueueType::AVDispatchMainQueue, block, synchronous);
 }
+    
+void AVDispatchQueue::DispatchTaskOnGlobalQueue(AVDispatchQueueType type, dispatch_block_t block, bool synchronous)
+{
+    AVDispatchQueue *queue = AVDefaultQueue();
+    queue->DispatchTask(AVDispatchQueueType::AVDispatchDefaultQueue, block, synchronous);
+}
 
 dispatch_queue_t AVDispatchQueue::Queue() const
 {

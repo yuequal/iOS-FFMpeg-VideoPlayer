@@ -17,6 +17,10 @@ extern "C"{
 #include <libavformat/avformat.h>
 }
 
+template <typename T,std::function<void(T **)> Free>
+struct AVObjectFree  {
+    void operator()(T *t) const {  Free(&t); };
+};
 struct AVCodecContextFree {
   void operator()(AVCodecContext* ctx) const { avcodec_free_context(&ctx); }
 };
@@ -24,7 +28,7 @@ struct AVFrameFree {
     void operator()(AVFrame *frame) const { av_frame_free(&frame); }
 };
 struct AVModeFrameFree {
-    void operator()(AVModeFrame *modeFrame) const { av_free_mode_frame(modeFrame);  }
+    void operator()(AVModeFrame *modeFrame) const { av_free_mode_frame(&modeFrame);  }
 };
 
 extern void AVFreePacket(AVPacket **packet);

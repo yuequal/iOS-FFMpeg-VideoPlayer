@@ -52,6 +52,8 @@ public:
 public:
     static void DispatchTaskOnMainQueue(dispatch_block_t block, bool synchronous);
     
+    static void DispatchTaskOnGlobalQueue(AVDispatchQueueType type, dispatch_block_t block, bool synchronous);
+    
 private:
     AVDispatchQueue* _AVQueueFromType(AVDispatchQueueType type);
     dispatch_queue_t _AVDispatchQueueFromType(AVDispatchQueueType type);

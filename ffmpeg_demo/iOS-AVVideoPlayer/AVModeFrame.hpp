@@ -19,7 +19,7 @@ extern "C" {
 
 class AVModeFrame;
 
-extern void av_free_mode_frame(AVModeFrame *frame);
+extern void av_free_mode_frame(AVModeFrame **frame);
 
 namespace AVVideoPlayer {
     

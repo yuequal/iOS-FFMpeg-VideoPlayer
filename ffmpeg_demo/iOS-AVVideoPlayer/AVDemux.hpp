@@ -32,6 +32,8 @@ public:
     
     void Start();
     
+    virtual void ReadPacket(AVPacket *packet);
+    
     virtual AVPacket *Read();
     
     virtual bool IsAudio(AVPacket *packet);

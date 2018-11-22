@@ -8,6 +8,11 @@
 
 #include "AVModeFrame.hpp"
 
+void av_free_mode_frame(AVModeFrame **frame)
+{
+    if (!frame) return;
+}
+
 namespace AVVideoPlayer {
     
 AVModeFrame* AVModeFrame::CreateMFrame(AVFrame *frame)
